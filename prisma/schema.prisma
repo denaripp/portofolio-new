@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------------------------------------------------
+// Admin & Auth
+// -------------------------------------------------------------
+model Admin {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// Hero Section
+// -------------------------------------------------------------
+model Hero {
+  id                 String   @id @default(cuid())
+  profileImage       String
+  name               String
+  roleId             String
+  roleEn             String
+  specializationId   String   @default("Next.js & React")
+  specializationEn   String   @default("Next.js & React")
+  headlineId         String
+  headlineEn         String
+  descriptionId      String   @db.Text
+  descriptionEn      String   @db.Text
+  primaryCtaTextId   String
+  primaryCtaTextEn   String
+  primaryCtaUrl      String   @default("/projects")
+  secondaryCtaTextId String
+  secondaryCtaTextEn String
+  secondaryCtaUrl    String   @default("/contact")
+  updatedAt          DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// About Section / Page
+// -------------------------------------------------------------
+model About {
+  id               String   @id @default(cuid())
+  name             String
+  profileImage     String
+  bioId            String   @db.Text
+  bioEn            String   @db.Text
+  bioSecondaryId   String?  @db.Text
+  bioSecondaryEn   String?  @db.Text
+  location         String
+  currentEducation String
+  status           String   @default("Open to Work")
+  email            String
+  whatsapp         String
+  updatedAt        DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// Skills
+// -------------------------------------------------------------
+enum SkillLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model Skill {
+  id           String     @id @default(cuid())
+  name         String
+  icon         String
+  category     String     @default("Development")
+  level        SkillLevel @default(INTERMEDIATE)
+  displayOrder Int        @default(0)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+// -------------------------------------------------------------
+// Projects
+// -------------------------------------------------------------
+enum ProjectStatus {
+  COMPLETED
+  IN_PROGRESS
+}
+
+model Project {
+  id            String        @id @default(cuid())
+  titleId       String
+  titleEn       String
+  descriptionId String        @db.Text
+  descriptionEn String        @db.Text
+  image         String
+  category      String        @default("Web Development")
+  techStack     String[]      @default([])
+  demoUrl       String?
+  githubUrl     String?
+  status        ProjectStatus @default(COMPLETED)
+  isFeatured    Boolean       @default(false)
+  displayOrder  Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+// -------------------------------------------------------------
+// Certificates
+// -------------------------------------------------------------
+model Certificate {
+  id             String   @id @default(cuid())
+  titleId        String
+  titleEn        String
+  organization   String
+  image          String
+  descriptionId  String?  @db.Text
+  descriptionEn  String?  @db.Text
+  dateObtained   String
+  certificateUrl String?
+  isFeatured     Boolean  @default(false)
+  displayOrder   Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// Social Links
+// -------------------------------------------------------------
+model SocialLink {
+  id           String   @id @default(cuid())
+  platform     String
+  icon         String
+  url          String
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// Footer Section
+// -------------------------------------------------------------
+model Footer {
+  id            String   @id @default(cuid())
+  taglineId     String
+  taglineEn     String
+  copyrightName String?  @default("Muhammad Najwa Syarif")
+  updatedAt     DateTime @updatedAt
+}
