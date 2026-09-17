@@ -3,7 +3,7 @@
 import * as React from "react";
 import { ProjectItem } from "@/types/content";
 import { useLanguage } from "@/components/providers/language-provider";
-import { ExternalLink, Layers, Sparkles, Globe, FolderGit2 } from "lucide-react";
+import { ExternalLink, Layers, Sparkles, FolderGit2 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons";
 
 interface ProjectCardProps {
@@ -19,10 +19,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const category = project.category || "Project";
 
   return (
-    <div className="group relative rounded-2xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/60 p-5 shadow-xs hover:shadow-lg hover:border-orange-500/50 transition-all duration-200 flex flex-col justify-between">
+    <div className="hover-lift-card group relative rounded-2xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/60 p-5 shadow-xs hover:border-orange-500/50 flex flex-col justify-between">
       <div className="space-y-4">
         {/* Project Visual / Thumbnail Container */}
-        <div className="relative w-full h-48 rounded-xl overflow-hidden bg-slate-100 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800 flex flex-col items-center justify-center p-4 group-hover:scale-[1.01] transition-transform duration-200">
+        <div className="relative w-full h-48 rounded-xl overflow-hidden bg-slate-100 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800 flex flex-col items-center justify-center p-4 group-hover:scale-[1.01] transition-transform duration-300">
           {/* Category Tag (Top Left) */}
           <div className="absolute top-3 left-3 z-10">
             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-navy-900/80 backdrop-blur-xs text-white border border-slate-700/60 shadow-xs">
@@ -55,7 +55,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <img
               src={project.image}
               alt={title}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
             <div className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 space-y-2">
@@ -104,7 +104,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             href={project.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white text-xs font-semibold shadow-xs transition-colors"
+            className="btn-interactive flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white text-xs font-semibold shadow-xs"
           >
             <span>{t.projects.liveDemo}</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -121,7 +121,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-navy-700 hover:border-slate-300 dark:hover:border-navy-600 bg-white dark:bg-navy-800 text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 text-xs font-medium transition-colors"
+            className="btn-interactive inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-navy-700 hover:border-slate-300 dark:hover:border-navy-600 bg-white dark:bg-navy-800 text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 text-xs font-medium"
             title="Open project link / repository"
           >
             {project.githubUrl.includes("github.com") ? (

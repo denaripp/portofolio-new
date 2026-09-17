@@ -50,7 +50,7 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
             <div
               key={cert.id}
               onClick={() => setSelectedCert(cert)}
-              className="group cursor-pointer rounded-2xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/60 p-5 shadow-xs hover:shadow-md hover:border-orange-500/50 transition-all duration-200 flex flex-col justify-between"
+              className="hover-lift-card group cursor-pointer rounded-2xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/60 p-5 shadow-xs hover:border-orange-500/50 flex flex-col justify-between"
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -63,7 +63,7 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
                 {/* Image Preview Box */}
                 <div className="relative w-full h-48 rounded-xl overflow-hidden bg-slate-100 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800 flex items-center justify-center">
                   <div className="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/40 transition-colors duration-200 flex items-center justify-center z-10 opacity-0 group-hover:opacity-100">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-600 text-white text-xs font-semibold shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-200">
+                    <span className="btn-interactive inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-600 text-white text-xs font-semibold shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-200">
                       <ZoomIn className="w-4 h-4" />
                       {t.certificates.viewCertificate}
                     </span>
@@ -72,7 +72,7 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
                     <img
                       src={cert.image}
                       alt={certTitle}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
                     <div className="relative w-full h-full flex items-center justify-center p-4">
@@ -150,7 +150,7 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
                 <button
                   type="button"
                   onClick={() => setIsZoomed(!isZoomed)}
-                  className="p-2 rounded-lg border border-slate-200 dark:border-navy-800 hover:bg-slate-100 dark:hover:bg-navy-800 text-slate-700 dark:text-slate-200 transition-colors"
+                  className="btn-interactive p-2 rounded-lg border border-slate-200 dark:border-navy-800 hover:bg-slate-100 dark:hover:bg-navy-800 text-slate-700 dark:text-slate-200"
                   title={isZoomed ? t.certificates.zoomOut : t.certificates.zoomIn}
                 >
                   {isZoomed ? (
@@ -165,7 +165,7 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
                     href={selectedCert.certificateUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg border border-slate-200 dark:border-navy-800 hover:bg-slate-100 dark:hover:bg-navy-800 text-slate-700 dark:text-slate-200 transition-colors"
+                    className="btn-interactive p-2 rounded-lg border border-slate-200 dark:border-navy-800 hover:bg-slate-100 dark:hover:bg-navy-800 text-slate-700 dark:text-slate-200"
                     title={t.certificates.verifyLink}
                   >
                     <ExternalLink className="w-4 h-4" />
@@ -178,7 +178,7 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
                     setSelectedCert(null);
                     setIsZoomed(false);
                   }}
-                  className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/60 transition-colors"
+                  className="btn-interactive p-2 rounded-lg bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/60"
                   title={`${t.common.close} (Esc)`}
                 >
                   <X className="w-5 h-5" />

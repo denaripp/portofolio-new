@@ -5,6 +5,7 @@ import Link from "next/link";
 import { HeroData, AboutData } from "@/types/content";
 import { useLanguage } from "@/components/providers/language-provider";
 import { ArrowRight, Terminal } from "lucide-react";
+import { ScrollReveal } from "@/components/public/scroll-reveal";
 
 interface HeroSectionProps {
   hero: HeroData | null;
@@ -44,7 +45,11 @@ export function HeroSection({ hero, about }: HeroSectionProps) {
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-12 pt-6 sm:pt-12">
         {/* Left Column: Text & CTAs */}
-        <div className="flex-1 space-y-6 text-center lg:text-left">
+        <ScrollReveal
+          className="flex-1 space-y-6 text-center lg:text-left"
+          delay={0}
+          duration={500}
+        >
           {/* Availability Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -75,29 +80,33 @@ export function HeroSection({ hero, about }: HeroSectionProps) {
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
             <Link
               href={hero?.primaryCtaUrl || "/projects"}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white font-semibold text-sm shadow-sm transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+              className="btn-interactive inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white font-semibold text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
             >
               <span>{heroPrimaryCta}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href={hero?.secondaryCtaUrl || "/contact"}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-300 dark:hover:border-navy-600 font-semibold text-sm transition-all duration-150"
+              className="btn-interactive inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-300 dark:hover:border-navy-600 font-semibold text-sm shadow-2xs"
             >
               <span>{heroSecondaryCta}</span>
             </Link>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Right Column: Visual Avatar / Profile Card */}
-        <div className="w-full max-w-md lg:w-[420px] shrink-0">
-          <div className="relative p-6 rounded-3xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/80 shadow-xl space-y-6">
+        <ScrollReveal
+          className="w-full max-w-md lg:w-[420px] shrink-0"
+          delay={120}
+          duration={550}
+        >
+          <div className="hover-lift-card relative p-6 rounded-3xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/80 shadow-xl space-y-6">
             <div className="relative w-full aspect-square rounded-2xl bg-radial from-navy-800 to-navy-950 border border-slate-700/60 overflow-hidden flex flex-col items-center justify-center p-6 text-white shadow-inner">
               {hero?.profileImage ? (
                 <img
                   src={hero.profileImage}
                   alt={hero.name}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               ) : (
                 <>
@@ -118,7 +127,7 @@ export function HeroSection({ hero, about }: HeroSectionProps) {
 
             {/* Quick Profile Snippets */}
             <div className="grid grid-cols-2 gap-3 pt-1 text-xs">
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800 transition-colors">
                 <span className="text-slate-400 block text-[10px] uppercase font-mono">
                   {t.hero.statusLabel}
                 </span>
@@ -126,7 +135,7 @@ export function HeroSection({ hero, about }: HeroSectionProps) {
                   {statusText}
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800 transition-colors">
                 <span className="text-slate-400 block text-[10px] uppercase font-mono">
                   {t.hero.specializationLabel}
                 </span>
@@ -136,7 +145,7 @@ export function HeroSection({ hero, about }: HeroSectionProps) {
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

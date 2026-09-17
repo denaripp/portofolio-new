@@ -6,6 +6,7 @@ import { CertificateItem } from "@/types/content";
 import { CertificateLightbox } from "@/components/public/certificate-lightbox";
 import { useLanguage } from "@/components/providers/language-provider";
 import { Award, ArrowRight } from "lucide-react";
+import { ScrollReveal } from "@/components/public/scroll-reveal";
 
 interface HomeFeaturedCertificatesProps {
   certificates: CertificateItem[];
@@ -18,7 +19,7 @@ export function HomeFeaturedCertificates({
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <ScrollReveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-600 dark:text-orange-400">
             <Award className="w-4 h-4" />
@@ -34,15 +35,17 @@ export function HomeFeaturedCertificates({
 
         <Link
           href="/certificates"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-600 hover:text-orange-700 dark:text-orange-400 transition-colors"
+          className="btn-interactive inline-flex items-center gap-1.5 text-xs font-semibold text-orange-600 hover:text-orange-700 dark:text-orange-400 transition-colors"
         >
           <span>{t.certificates.viewAll}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
-      </div>
+      </ScrollReveal>
 
       {certificates.length > 0 ? (
-        <CertificateLightbox certificates={certificates} />
+        <ScrollReveal delay={100} duration={500}>
+          <CertificateLightbox certificates={certificates} />
+        </ScrollReveal>
       ) : (
         <p className="text-xs text-slate-500 italic">
           {t.certificates.empty}

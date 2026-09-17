@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/db/prisma";
 import { getCurrentAdmin } from "@/lib/auth/session";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag, revalidateTag } from "next/cache";
 import { SkillLevel, ProjectStatus } from "@prisma/client";
 import { translateText } from "@/lib/translate";
 
@@ -18,6 +18,20 @@ function isValidUrl(url: string): boolean {
     return true;
   } catch {
     return false;
+  }
+}
+
+function invalidateTags(...tags: string[]) {
+  for (const tag of tags) {
+    try {
+      updateTag(tag);
+    } catch {
+      try {
+        revalidateTag(tag, { expire: 0 });
+      } catch {
+        // ignore
+      }
+    }
   }
 }
 
@@ -87,6 +101,7 @@ export async function updateHeroAction(formData: FormData): Promise<ActionResult
       await prisma.hero.create({ data });
     }
 
+    invalidateTags("hero", "public-content");
     revalidatePath("/");
     revalidatePath("/", "layout");
     revalidatePath("/about");
@@ -146,6 +161,7 @@ export async function updateAboutAction(formData: FormData): Promise<ActionResul
       await prisma.about.create({ data });
     }
 
+    invalidateTags("about", "public-content");
     revalidatePath("/about");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/about");
@@ -176,6 +192,7 @@ export async function createSkillAction(formData: FormData): Promise<ActionResul
       data: { name, icon, category, level, displayOrder },
     });
 
+    invalidateTags("skills", "public-content");
     revalidatePath("/skills");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/skills");
@@ -204,6 +221,7 @@ export async function updateSkillAction(id: string, formData: FormData): Promise
       data: { name, icon, category, level, displayOrder },
     });
 
+    invalidateTags("skills", "public-content");
     revalidatePath("/skills");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/skills");
@@ -220,6 +238,7 @@ export async function deleteSkillAction(id: string): Promise<ActionResult> {
 
   try {
     await prisma.skill.delete({ where: { id } });
+    invalidateTags("skills", "public-content");
     revalidatePath("/skills");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/skills");
@@ -287,6 +306,7 @@ export async function createProjectAction(formData: FormData): Promise<ActionRes
       },
     });
 
+    invalidateTags("projects", "public-content");
     revalidatePath("/projects");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/projects");
@@ -352,6 +372,7 @@ export async function updateProjectAction(id: string, formData: FormData): Promi
       },
     });
 
+    invalidateTags("projects", "public-content");
     revalidatePath("/projects");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/projects");
@@ -368,6 +389,7 @@ export async function deleteProjectAction(id: string): Promise<ActionResult> {
 
   try {
     await prisma.project.delete({ where: { id } });
+    invalidateTags("projects", "public-content");
     revalidatePath("/projects");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/projects");
@@ -423,6 +445,7 @@ export async function createCertificateAction(formData: FormData): Promise<Actio
       },
     });
 
+    invalidateTags("certificates", "public-content");
     revalidatePath("/certificates");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/certificates");
@@ -476,6 +499,7 @@ export async function updateCertificateAction(id: string, formData: FormData): P
       },
     });
 
+    invalidateTags("certificates", "public-content");
     revalidatePath("/certificates");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/certificates");
@@ -492,6 +516,7 @@ export async function deleteCertificateAction(id: string): Promise<ActionResult>
 
   try {
     await prisma.certificate.delete({ where: { id } });
+    invalidateTags("certificates", "public-content");
     revalidatePath("/certificates");
     revalidatePath("/");
     revalidatePath("/admin/dashboard/certificates");
@@ -524,6 +549,7 @@ export async function createSocialLinkAction(formData: FormData): Promise<Action
       data: { platform, icon, url, displayOrder, isActive },
     });
 
+    invalidateTags("social-links", "public-content");
     revalidatePath("/contact");
     revalidatePath("/");
     revalidatePath("/", "layout");
@@ -555,6 +581,7 @@ export async function updateSocialLinkAction(id: string, formData: FormData): Pr
       data: { platform, icon, url, displayOrder, isActive },
     });
 
+    invalidateTags("social-links", "public-content");
     revalidatePath("/contact");
     revalidatePath("/");
     revalidatePath("/", "layout");
@@ -572,6 +599,7 @@ export async function deleteSocialLinkAction(id: string): Promise<ActionResult> 
 
   try {
     await prisma.socialLink.delete({ where: { id } });
+    invalidateTags("social-links", "public-content");
     revalidatePath("/contact");
     revalidatePath("/");
     revalidatePath("/", "layout");
@@ -690,7 +718,18 @@ export async function retranslateAllAction(): Promise<ActionResult> {
       count += 1;
     }
 
-    // Revalidate all public routes
+    // Invalidate all public cache tags & paths
+    invalidateTags(
+      "public-content",
+      "hero",
+      "about",
+      "skills",
+      "projects",
+      "certificates",
+      "social-links",
+      "footer"
+    );
+
     revalidatePath("/");
     revalidatePath("/", "layout");
     revalidatePath("/about");
@@ -740,6 +779,7 @@ export async function updateFooterAction(formData: FormData): Promise<ActionResu
       await prisma.footer.create({ data });
     }
 
+    invalidateTags("footer", "public-content");
     revalidatePath("/", "layout");
     revalidatePath("/");
     revalidatePath("/about");

@@ -78,7 +78,7 @@ export function Navbar() {
           {/* CTA Contact Button */}
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white text-xs font-semibold shadow-xs transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+            className="btn-interactive inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white text-xs font-semibold shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
           >
             <span>{t.nav.contactMe}</span>
             <ArrowUpRight className="w-3.5 h-3.5" />

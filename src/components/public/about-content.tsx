@@ -15,6 +15,7 @@ import {
   Sparkles,
   ExternalLink,
 } from "lucide-react";
+import { ScrollReveal } from "@/components/public/scroll-reveal";
 
 interface AboutContentProps {
   about: AboutData | null;
@@ -33,7 +34,7 @@ export function AboutContent({ about }: AboutContentProps) {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-16">
       {/* Page Header */}
-      <div className="space-y-3 max-w-2xl">
+      <ScrollReveal className="space-y-3 max-w-2xl">
         <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-600 dark:text-orange-400">
           <Sparkles className="w-4 h-4" />
           <span>{t.about.badge}</span>
@@ -44,106 +45,108 @@ export function AboutContent({ about }: AboutContentProps) {
         <p className="text-body text-slate-600 dark:text-slate-300 text-sm sm:text-base">
           {t.about.subtitle}
         </p>
-      </div>
+      </ScrollReveal>
 
       {/* Main About Card Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Left Column: Profile Card */}
-        <div className="p-6 rounded-3xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/70 shadow-xs space-y-6">
-          <div className="relative aspect-square rounded-2xl bg-radial from-navy-800 to-navy-950 border border-slate-700/60 overflow-hidden flex flex-col items-center justify-center p-6 text-white text-center">
-            {about?.profileImage ? (
-              <img
-                src={about.profileImage}
-                alt={about.name}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            ) : (
-              <>
-                <div className="w-24 h-24 rounded-2xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400 mb-4 shadow-lg">
-                  <User className="w-12 h-12" />
+        <ScrollReveal delay={100} duration={500}>
+          <div className="hover-lift-card p-6 rounded-3xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/70 shadow-xs space-y-6">
+            <div className="relative aspect-square rounded-2xl bg-radial from-navy-800 to-navy-950 border border-slate-700/60 overflow-hidden flex flex-col items-center justify-center p-6 text-white text-center">
+              {about?.profileImage ? (
+                <img
+                  src={about.profileImage}
+                  alt={about.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              ) : (
+                <>
+                  <div className="w-24 h-24 rounded-2xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400 mb-4 shadow-lg">
+                    <User className="w-12 h-12" />
+                  </div>
+                  <h2 className="heading-title text-xl font-bold">
+                    {about?.name || "Muhammad Najwa Syarif"}
+                  </h2>
+                  <p className="text-xs text-slate-300 mt-1">Web Developer</p>
+                </>
+              )}
+            </div>
+
+            {/* Quick Meta Fields */}
+            <div className="space-y-3 pt-2 text-xs">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800">
+                <MapPin className="w-4 h-4 text-orange-500 shrink-0" />
+                <div>
+                  <span className="text-[10px] text-slate-400 font-mono block">
+                    {t.about.location}
+                  </span>
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">
+                    {about?.location || "Indonesia"}
+                  </span>
                 </div>
-                <h2 className="heading-title text-xl font-bold">
-                  {about?.name || "Muhammad Najwa Syarif"}
-                </h2>
-                <p className="text-xs text-slate-300 mt-1">Web Developer</p>
-              </>
-            )}
-          </div>
+              </div>
 
-          {/* Quick Meta Fields */}
-          <div className="space-y-3 pt-2 text-xs">
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800">
-              <MapPin className="w-4 h-4 text-orange-500 shrink-0" />
-              <div>
-                <span className="text-[10px] text-slate-400 font-mono block">
-                  {t.about.location}
-                </span>
-                <span className="font-semibold text-slate-900 dark:text-slate-100">
-                  {about?.location || "Indonesia"}
-                </span>
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800">
+                <GraduationCap className="w-4 h-4 text-orange-500 shrink-0" />
+                <div>
+                  <span className="text-[10px] text-slate-400 font-mono block">
+                    {t.about.education}
+                  </span>
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">
+                    {about?.currentEducation || "Informatika / Computer Science"}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800">
+                <Briefcase className="w-4 h-4 text-orange-500 shrink-0" />
+                <div>
+                  <span className="text-[10px] text-slate-400 font-mono block">
+                    {t.about.status}
+                  </span>
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">
+                    {about?.status || "Open to Work"}
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800">
-              <GraduationCap className="w-4 h-4 text-orange-500 shrink-0" />
-              <div>
-                <span className="text-[10px] text-slate-400 font-mono block">
-                  {t.about.education}
-                </span>
-                <span className="font-semibold text-slate-900 dark:text-slate-100">
-                  {about?.currentEducation || "Informatika / Computer Science"}
-                </span>
-              </div>
-            </div>
+            {/* Contact Direct Actions */}
+            <div className="pt-2 space-y-2 border-t border-slate-100 dark:border-navy-800">
+              {about?.email && (
+                <a
+                  href={`mailto:${about.email}`}
+                  className="btn-interactive w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-800 hover:border-orange-500/50 bg-slate-50 dark:bg-navy-950 text-xs font-medium text-slate-700 dark:text-slate-200"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Mail className="w-3.5 h-3.5 text-orange-500" />
+                    {about.email}
+                  </span>
+                  <ExternalLink className="w-3 h-3 opacity-60" />
+                </a>
+              )}
 
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-navy-950 border border-slate-200/80 dark:border-navy-800">
-              <Briefcase className="w-4 h-4 text-orange-500 shrink-0" />
-              <div>
-                <span className="text-[10px] text-slate-400 font-mono block">
-                  {t.about.status}
-                </span>
-                <span className="font-semibold text-slate-900 dark:text-slate-100">
-                  {about?.status || "Open to Work"}
-                </span>
-              </div>
+              {about?.whatsapp && (
+                <a
+                  href={`https://wa.me/${about.whatsapp.replace(/[^0-9]/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-interactive w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-800 hover:border-orange-500/50 bg-slate-50 dark:bg-navy-950 text-xs font-medium text-slate-700 dark:text-slate-200"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Phone className="w-3.5 h-3.5 text-emerald-500" />
+                    {about.whatsapp}
+                  </span>
+                  <ExternalLink className="w-3 h-3 opacity-60" />
+                </a>
+              )}
             </div>
           </div>
-
-          {/* Contact Direct Actions */}
-          <div className="pt-2 space-y-2 border-t border-slate-100 dark:border-navy-800">
-            {about?.email && (
-              <a
-                href={`mailto:${about.email}`}
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-800 hover:border-orange-500/50 bg-slate-50 dark:bg-navy-950 text-xs font-medium text-slate-700 dark:text-slate-200 transition-colors"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-orange-500" />
-                  {about.email}
-                </span>
-                <ExternalLink className="w-3 h-3 opacity-60" />
-              </a>
-            )}
-
-            {about?.whatsapp && (
-              <a
-                href={`https://wa.me/${about.whatsapp.replace(/[^0-9]/g, "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-800 hover:border-orange-500/50 bg-slate-50 dark:bg-navy-950 text-xs font-medium text-slate-700 dark:text-slate-200 transition-colors"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-emerald-500" />
-                  {about.whatsapp}
-                </span>
-                <ExternalLink className="w-3 h-3 opacity-60" />
-              </a>
-            )}
-          </div>
-        </div>
+        </ScrollReveal>
 
         {/* Right Column: Bio Details */}
-        <div className="lg:col-span-2 space-y-8">
-          <div className="p-8 rounded-3xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/60 shadow-xs space-y-6">
+        <ScrollReveal className="lg:col-span-2 space-y-8" delay={180} duration={500}>
+          <div className="hover-lift-card p-8 rounded-3xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/60 shadow-xs space-y-6">
             <h3 className="heading-title text-xl sm:text-2xl text-slate-900 dark:text-white">
               {t.about.professionalProfile}
             </h3>
@@ -156,20 +159,20 @@ export function AboutContent({ about }: AboutContentProps) {
             <div className="pt-4 flex flex-wrap items-center gap-4 border-t border-slate-100 dark:border-navy-800/80">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-xs transition-colors"
+                className="btn-interactive inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-xs"
               >
                 <span>{t.about.viewProjects}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
               <Link
                 href="/certificates"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-700 hover:border-slate-300 dark:hover:border-navy-600 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
+                className="btn-interactive inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-700 hover:border-slate-300 dark:hover:border-navy-600 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-200 text-xs font-medium"
               >
                 <span>{t.about.viewCertificates}</span>
               </Link>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   );
