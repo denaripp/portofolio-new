@@ -4,6 +4,7 @@ import { getCurrentLocale, getDictionary } from "@/lib/i18n/server";
 import { constructPageMetadata } from "@/lib/seo/metadata";
 import { SkillLevel } from "@/types/content";
 import { ScrollReveal } from "@/components/public/scroll-reveal";
+import { SkillIcon } from "@/components/ui/skill-icon";
 import {
   Code2,
   Wrench,
@@ -121,15 +122,12 @@ export default async function SkillsPage() {
                           <div className="flex items-start justify-between gap-3">
                             <div className="flex items-center gap-3">
                               <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-navy-800 flex items-center justify-center text-slate-700 dark:text-slate-300 font-bold text-sm overflow-hidden border border-slate-200/80 dark:border-navy-700 shrink-0">
-                                {skill.icon && (skill.icon.startsWith("/") || skill.icon.startsWith("http")) ? (
-                                  <img
-                                    src={skill.icon}
-                                    alt={skill.name}
-                                    className="w-full h-full object-contain p-1.5"
-                                  />
-                                ) : (
-                                  <Layers className="w-5 h-5 text-orange-500" />
-                                )}
+                                <SkillIcon
+                                  icon={skill.icon}
+                                  name={skill.name}
+                                  className="w-full h-full object-contain p-1.5"
+                                  fallbackClassName="w-5 h-5 text-orange-500"
+                                />
                               </div>
                               <div>
                                 <h3 className="font-semibold text-sm sm:text-base text-slate-900 dark:text-white">

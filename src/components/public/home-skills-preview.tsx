@@ -4,8 +4,9 @@ import * as React from "react";
 import Link from "next/link";
 import { SkillItem } from "@/types/content";
 import { useLanguage } from "@/components/providers/language-provider";
-import { Sparkles, ArrowRight, Layers } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/public/scroll-reveal";
+import { SkillIcon } from "@/components/ui/skill-icon";
 
 interface HomeSkillsPreviewProps {
   skills: SkillItem[];
@@ -45,15 +46,12 @@ export function HomeSkillsPreview({ skills }: HomeSkillsPreviewProps) {
           <ScrollReveal key={skill.id} delay={index * 60} duration={450}>
             <div className="hover-lift-card h-full p-4 rounded-xl border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900/60 shadow-2xs hover:border-orange-500/50 text-center space-y-2">
               <div className="w-10 h-10 mx-auto rounded-lg bg-slate-100 dark:bg-navy-800 flex items-center justify-center text-orange-600 dark:text-orange-400 overflow-hidden border border-slate-200/80 dark:border-navy-700">
-                {skill.icon && (skill.icon.startsWith("/") || skill.icon.startsWith("http")) ? (
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-full h-full object-contain p-1.5"
-                  />
-                ) : (
-                  <Layers className="w-5 h-5" />
-                )}
+                <SkillIcon
+                  icon={skill.icon}
+                  name={skill.name}
+                  className="w-full h-full object-contain p-1.5"
+                  fallbackClassName="w-5 h-5 text-orange-500"
+                />
               </div>
               <div>
                 <p className="font-semibold text-xs sm:text-sm text-slate-900 dark:text-white">

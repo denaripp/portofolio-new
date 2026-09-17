@@ -8,8 +8,10 @@ import {
   CheckCircle2,
   AlertCircle,
   Crop,
+  Layers,
 } from "lucide-react";
 import { ImageCropperModal } from "./image-cropper-modal";
+import { resolveSkillIconUrl } from "@/lib/icon-resolver";
 
 interface ImageUploadProps {
   name: string;
@@ -36,6 +38,7 @@ export function ImageUpload({
 }: ImageUploadProps) {
   const [imageUrl, setImageUrl] = React.useState(defaultValue);
   const [previewUrl, setPreviewUrl] = React.useState(defaultValue);
+  const [hasPreviewError, setHasPreviewError] = React.useState(false);
   const [isUploading, setIsUploading] = React.useState(false);
   const [uploadError, setUploadError] = React.useState<string | null>(null);
   const [isCropperOpen, setIsCropperOpen] = React.useState(false);
@@ -45,6 +48,11 @@ export function ImageUpload({
 
   const numericAspectRatio: number | "auto" =
     aspectRatio === "square" ? 1 : aspectRatio === "landscape" ? 16 / 9 : "auto";
+
+  // Resolve preview url (supports keywords for skills e.g. "react" -> Simple Icons CDN)
+  const resolvedPreviewUrl = React.useMemo(() => {
+    return resolveSkillIconUrl(previewUrl);
+  }, [previewUrl]);
 
   const uploadBlob = async (blob: Blob | File) => {
     setIsUploading(true);
@@ -67,6 +75,7 @@ export function ImageUpload({
 
       setImageUrl(data.url);
       setPreviewUrl(data.url);
+      setHasPreviewError(false);
     } catch (err) {
       setUploadError(
         err instanceof Error ? err.message : "Gagal mengunggah gambar."
@@ -82,6 +91,7 @@ export function ImageUpload({
     if (!file) return;
 
     setUploadError(null);
+    setHasPreviewError(false);
 
     // Client-side quick size validation
     if (file.size > 10 * 1024 * 1024) {
@@ -103,12 +113,14 @@ export function ImageUpload({
 
   const handleCropComplete = async (croppedBlob: Blob, croppedPreview: string) => {
     setPreviewUrl(croppedPreview);
+    setHasPreviewError(false);
     await uploadBlob(croppedBlob);
   };
 
   const handleOpenCropperForExisting = () => {
-    if (previewUrl || imageUrl) {
-      setRawImageForCrop(previewUrl || imageUrl);
+    const activeUrl = resolvedPreviewUrl || previewUrl || imageUrl;
+    if (activeUrl) {
+      setRawImageForCrop(activeUrl);
       setIsCropperOpen(true);
     }
   };
@@ -116,6 +128,7 @@ export function ImageUpload({
   const handleClear = () => {
     setImageUrl("");
     setPreviewUrl("");
+    setHasPreviewError(false);
     setUploadError(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -147,7 +160,7 @@ export function ImageUpload({
         )}
       </div>
 
-      {/* Hidden input to pass the final URL in form submission */}
+      {/* Hidden input to pass the final URL/keyword in form submission */}
       <input type="hidden" name={name} value={imageUrl} />
 
       {/* File input (hidden) */}
@@ -161,14 +174,15 @@ export function ImageUpload({
 
       {/* Upload Box / Preview */}
       <div className="flex flex-col sm:flex-row items-start gap-4">
-        {previewUrl ? (
+        {resolvedPreviewUrl && !hasPreviewError ? (
           <div
-            className={`relative rounded-xl overflow-hidden border border-slate-200 dark:border-navy-700 bg-slate-100 dark:bg-navy-950 w-full ${aspectClass} flex items-center justify-center group shrink-0`}
+            className={`relative rounded-xl overflow-hidden border border-slate-200 dark:border-navy-700 bg-slate-100 dark:bg-navy-950 w-full ${aspectClass} flex items-center justify-center group shrink-0 p-2`}
           >
             <img
-              src={previewUrl}
+              src={resolvedPreviewUrl}
               alt="Preview"
               className="w-full h-full object-contain"
+              onError={() => setHasPreviewError(true)}
             />
             {isUploading && (
               <div className="absolute inset-0 bg-navy-950/70 flex items-center justify-center text-white text-xs gap-2 backdrop-blur-xs">
@@ -178,7 +192,7 @@ export function ImageUpload({
             )}
             {!isUploading && (
               <div className="absolute inset-0 bg-navy-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1.5 p-2">
-                {enableCropping && (
+                {enableCropping && !resolvedPreviewUrl.startsWith("https://cdn.simpleicons.org") && (
                   <button
                     type="button"
                     onClick={handleOpenCropperForExisting}
@@ -204,18 +218,24 @@ export function ImageUpload({
             className={`cursor-pointer border-2 border-dashed border-slate-200 dark:border-navy-700 hover:border-orange-500 rounded-2xl bg-slate-50 dark:bg-navy-950/60 p-5 w-full ${aspectClass} flex flex-col items-center justify-center text-center space-y-2 transition-colors shrink-0`}
           >
             <div className="w-8 h-8 rounded-lg bg-orange-50 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center">
-              <Upload className="w-4 h-4" />
+              {hasPreviewError ? <Layers className="w-4 h-4 text-orange-500" /> : <Upload className="w-4 h-4" />}
             </div>
             <div className="text-[11px] text-slate-500 dark:text-slate-400">
-              <span className="font-semibold text-orange-600 dark:text-orange-400">
-                Pilih file
-              </span>{" "}
-              untuk upload
+              {hasPreviewError ? (
+                <span className="text-slate-500 dark:text-slate-400">Icon tidak ditemukan (default)</span>
+              ) : (
+                <>
+                  <span className="font-semibold text-orange-600 dark:text-orange-400">
+                    Pilih file
+                  </span>{" "}
+                  untuk upload
+                </>
+              )}
             </div>
           </div>
         )}
 
-        {/* Info & URL Input fallback & Crop Trigger */}
+        {/* Info & URL / Keyword Input & Crop Trigger */}
         <div className="flex-1 space-y-2 w-full">
           <div className="flex flex-wrap items-center gap-2">
             <button
@@ -237,7 +257,7 @@ export function ImageUpload({
               )}
             </button>
 
-            {enableCropping && (previewUrl || imageUrl) && !isUploading && (
+            {enableCropping && (previewUrl || imageUrl) && !isUploading && !resolvedPreviewUrl.startsWith("https://cdn.simpleicons.org") && (
               <button
                 type="button"
                 onClick={handleOpenCropperForExisting}
@@ -260,7 +280,7 @@ export function ImageUpload({
             {description}
           </p>
 
-          {/* Manual URL Input Option */}
+          {/* Manual URL or Keyword Input */}
           <div className="pt-1">
             <input
               type="text"
@@ -268,8 +288,9 @@ export function ImageUpload({
               onChange={(e) => {
                 setImageUrl(e.target.value);
                 setPreviewUrl(e.target.value);
+                setHasPreviewError(false);
               }}
-              placeholder="atau masukkan URL gambar (e.g. /images/...)"
+              placeholder="atau ketik icon keyword (misal: react, figma) / URL"
               className="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-navy-800 bg-slate-50 dark:bg-navy-950 text-[11px] text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-orange-500 font-mono"
             />
           </div>

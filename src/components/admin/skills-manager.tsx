@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { SkillItem, SkillLevel } from "@/types/content";
+import { SkillItem } from "@/types/content";
 import { createSkillAction, updateSkillAction, deleteSkillAction } from "@/actions/cms.actions";
 import { ImageUpload } from "@/components/admin/image-upload";
+import { SkillIcon } from "@/components/ui/skill-icon";
 import { Plus, Trash2, Edit2, X, Check, AlertCircle, Sparkles } from "lucide-react";
 
 interface SkillsManagerProps {
@@ -128,7 +129,12 @@ export function SkillsManager({ skills }: SkillsManagerProps) {
               {skills.map((skill) => (
                 <tr key={skill.id} className="hover:bg-slate-50/60 dark:hover:bg-navy-900/40 transition-colors">
                   <td className="px-6 py-4 font-semibold text-slate-900 dark:text-white">
-                    {skill.name}
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-slate-100 dark:bg-navy-800 flex items-center justify-center p-1 border border-slate-200/80 dark:border-navy-700 shrink-0">
+                        <SkillIcon icon={skill.icon} name={skill.name} className="w-full h-full object-contain" fallbackClassName="w-3.5 h-3.5 text-orange-500" />
+                      </div>
+                      <span>{skill.name}</span>
+                    </div>
                   </td>
                   <td className="px-6 py-4">
                     <span className="px-2.5 py-1 rounded-md bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 text-[11px] font-medium border border-orange-200 dark:border-orange-800/60">
@@ -140,7 +146,7 @@ export function SkillsManager({ skills }: SkillsManagerProps) {
                       {skill.level.toLowerCase()}
                     </span>
                   </td>
-                  <td className="px-6 py-4 font-mono text-slate-400">
+                  <td className="px-6 py-4 font-mono text-slate-500 dark:text-slate-400 truncate max-w-[200px]" title={skill.icon}>
                     {skill.icon}
                   </td>
                   <td className="px-6 py-4 text-right">
@@ -263,7 +269,7 @@ export function SkillsManager({ skills }: SkillsManagerProps) {
                   defaultValue={editingSkill?.icon || ""}
                   folder="skills"
                   aspectRatio="square"
-                  description="Upload gambar icon (PNG/SVG/WebP) atau ketik icon keyword (misal: react, figma, photoshop)."
+                  description="Upload gambar icon (PNG/SVG/WebP), atau ketik nama icon dalam bahasa Inggris/slug (misal: react, figma, microsoftexcel) untuk mengambil otomatis dari Simple Icons."
                 />
               </div>
 
