@@ -13,9 +13,18 @@ const nextConfig: NextConfig = {
         hostname: "public.blob.vercel-storage.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.jsdelivr.net",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.simpleicons.org",
+        port: "",
+      },
     ],
   },
 };
 
 export default nextConfig;
-
