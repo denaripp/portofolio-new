@@ -136,7 +136,7 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
               setSelectedCert(null);
               setIsZoomed(false);
             }}
-            className="fixed inset-0 z-[100] bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
+            className="fixed inset-0 z-[100] bg-navy-950/40 flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
           >
             {/* Modal Container */}
             <div
