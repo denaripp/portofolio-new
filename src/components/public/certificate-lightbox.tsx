@@ -128,25 +128,25 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
             setSelectedCert(null);
             setIsZoomed(false);
           }}
-          className="fixed inset-0 z-50 bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
         >
           {/* Modal Container */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-4xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-navy-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200"
+            className="relative w-full max-w-4xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-navy-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[90vh] animate-in zoom-in-95 duration-200"
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-navy-800 bg-slate-50/50 dark:bg-navy-950/50">
-              <div>
-                <h4 className="heading-title text-base sm:text-lg text-slate-900 dark:text-white">
+            <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4 border-b border-slate-200 dark:border-navy-800 bg-slate-50/80 dark:bg-navy-950/80 shrink-0">
+              <div className="min-w-0 flex-1">
+                <h4 className="heading-title text-sm sm:text-lg text-slate-900 dark:text-white truncate">
                   {selectedCert.title[locale] || selectedCert.title.id}
                 </h4>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
                   {selectedCert.organization} • {selectedCert.dateObtained}
                 </p>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <button
                   type="button"
                   onClick={() => setIsZoomed(!isZoomed)}
@@ -187,23 +187,23 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
             </div>
 
             {/* Modal Body / Image Viewer */}
-            <div className="p-4 sm:p-6 overflow-auto flex items-center justify-center bg-slate-100/60 dark:bg-navy-950/60 min-h-[360px]">
+            <div className="p-3 sm:p-6 overflow-y-auto overflow-x-hidden flex flex-col items-center bg-slate-100/60 dark:bg-navy-950/60 flex-1 min-h-0">
               <div
                 className={cn(
-                  "transition-all duration-200 rounded-2xl overflow-hidden border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900 flex flex-col items-center justify-center text-center shadow-lg",
+                  "transition-all duration-200 rounded-2xl overflow-hidden border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900 flex flex-col items-center justify-center text-center shadow-lg my-auto",
                   isZoomed ? "w-[140%] max-w-none" : "w-full max-w-3xl"
                 )}
               >
                 {selectedCert.image ? (
                   <div className="w-full flex flex-col">
-                    <div className="w-full bg-slate-950/50 p-2 sm:p-4 flex items-center justify-center min-h-[260px]">
+                    <div className="w-full bg-slate-950/50 p-2 sm:p-4 flex items-center justify-center min-h-[180px] sm:min-h-[260px]">
                       <ImagePreview
                         src={selectedCert.image}
                         alt={selectedCert.title[locale] || selectedCert.title.id}
-                        maxHeightClassName={isZoomed ? "max-h-none" : "max-h-[65vh]"}
+                        maxHeightClassName={isZoomed ? "max-h-none" : "max-h-[45dvh] sm:max-h-[65vh]"}
                       />
                     </div>
-                    <div className="p-5 sm:p-6 text-left border-t border-slate-100 dark:border-navy-800 space-y-2">
+                    <div className="p-4 sm:p-6 text-left border-t border-slate-100 dark:border-navy-800 space-y-2">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-semibold text-orange-600 dark:text-orange-400">
                           {selectedCert.organization}
@@ -213,19 +213,19 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
                         </span>
                       </div>
                       {selectedCert.description && (
-                        <p className="text-body text-xs text-slate-600 dark:text-slate-300">
+                        <p className="text-body text-xs sm:text-sm text-slate-600 dark:text-slate-300">
                           {selectedCert.description[locale] || selectedCert.description.id}
                         </p>
                       )}
                     </div>
                   </div>
                 ) : (
-                  <div className="p-8 flex flex-col items-center justify-center">
-                    <Award className="w-20 h-20 text-orange-500 mb-4" />
-                    <h5 className="heading-title text-xl text-slate-900 dark:text-white mb-1">
+                  <div className="p-6 sm:p-8 flex flex-col items-center justify-center">
+                    <Award className="w-16 h-16 sm:w-20 sm:h-20 text-orange-500 mb-4" />
+                    <h5 className="heading-title text-lg sm:text-xl text-slate-900 dark:text-white mb-1">
                       {selectedCert.title[locale] || selectedCert.title.id}
                     </h5>
-                    <p className="text-sm font-semibold text-orange-600 dark:text-orange-400 mb-3">
+                    <p className="text-xs sm:text-sm font-semibold text-orange-600 dark:text-orange-400 mb-3">
                       {t.certificates.organizer}: {selectedCert.organization}
                     </p>
                     {selectedCert.description && (
@@ -243,15 +243,15 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
             </div>
 
             {/* Modal Footer */}
-            <div className="px-6 py-3 border-t border-slate-200 dark:border-navy-800 bg-slate-50/50 dark:bg-navy-950/50 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-              <span>{t.certificates.modalHint}</span>
+            <div className="px-4 py-2.5 sm:px-6 sm:py-3 border-t border-slate-200 dark:border-navy-800 bg-slate-50/80 dark:bg-navy-950/80 flex items-center justify-between text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 shrink-0">
+              <span className="truncate mr-2">{t.certificates.modalHint}</span>
               <button
                 type="button"
                 onClick={() => {
                   setSelectedCert(null);
                   setIsZoomed(false);
                 }}
-                className="font-semibold text-orange-600 hover:text-orange-700 dark:text-orange-400"
+                className="font-semibold text-orange-600 hover:text-orange-700 dark:text-orange-400 shrink-0"
               >
                 {t.certificates.closeLightbox}
               </button>
