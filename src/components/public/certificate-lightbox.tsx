@@ -4,7 +4,6 @@ import * as React from "react";
 import { CertificateItem } from "@/types/content";
 import { useLanguage } from "@/components/providers/language-provider";
 import { X, ZoomIn, ZoomOut, ExternalLink, Award, Calendar } from "lucide-react";
-import { ImagePreview } from "@/components/ui/image-preview";
 import { cn } from "@/lib/utils";
 
 interface CertificateLightboxProps {
@@ -136,7 +135,7 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
             className="relative w-full max-w-4xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-navy-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[90vh] animate-in zoom-in-95 duration-200"
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4 border-b border-slate-200 dark:border-navy-800 bg-slate-50/80 dark:bg-navy-950/80 shrink-0">
+            <div className="shrink-0 flex items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4 border-b border-slate-200 dark:border-navy-800 bg-slate-50/90 dark:bg-navy-950/90 z-10">
               <div className="min-w-0 flex-1">
                 <h4 className="heading-title text-sm sm:text-lg text-slate-900 dark:text-white truncate">
                   {selectedCert.title[locale] || selectedCert.title.id}
@@ -147,18 +146,26 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
               </div>
 
               <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => setIsZoomed(!isZoomed)}
-                  className="btn-interactive p-2 rounded-lg border border-slate-200 dark:border-navy-800 hover:bg-slate-100 dark:hover:bg-navy-800 text-slate-700 dark:text-slate-200"
-                  title={isZoomed ? t.certificates.zoomOut : t.certificates.zoomIn}
-                >
-                  {isZoomed ? (
-                    <ZoomOut className="w-4 h-4 text-orange-500" />
-                  ) : (
-                    <ZoomIn className="w-4 h-4" />
-                  )}
-                </button>
+                {selectedCert.image && (
+                  <button
+                    type="button"
+                    onClick={() => setIsZoomed((prev) => !prev)}
+                    className={cn(
+                      "btn-interactive p-2 rounded-lg border transition-colors",
+                      isZoomed
+                        ? "bg-orange-500/15 border-orange-500/40 text-orange-600 dark:text-orange-400"
+                        : "border-slate-200 dark:border-navy-800 hover:bg-slate-100 dark:hover:bg-navy-800 text-slate-700 dark:text-slate-200"
+                    )}
+                    title={isZoomed ? t.certificates.zoomOut : t.certificates.zoomIn}
+                    aria-label={isZoomed ? t.certificates.zoomOut : t.certificates.zoomIn}
+                  >
+                    {isZoomed ? (
+                      <ZoomOut className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                    ) : (
+                      <ZoomIn className="w-4 h-4" />
+                    )}
+                  </button>
+                )}
 
                 {selectedCert.certificateUrl && (
                   <a
@@ -186,64 +193,94 @@ export function CertificateLightbox({ certificates }: CertificateLightboxProps) 
               </div>
             </div>
 
-            {/* Modal Body / Image Viewer */}
-            <div className="p-3 sm:p-6 overflow-y-auto overflow-x-hidden flex flex-col items-center bg-slate-100/60 dark:bg-navy-950/60 flex-1 min-h-0">
-              <div
-                className={cn(
-                  "transition-all duration-200 rounded-2xl overflow-hidden border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900 flex flex-col items-center justify-center text-center shadow-lg my-auto",
-                  isZoomed ? "w-[140%] max-w-none" : "w-full max-w-3xl"
-                )}
-              >
-                {selectedCert.image ? (
-                  <div className="w-full flex flex-col">
-                    <div className="w-full bg-slate-950/50 p-2 sm:p-4 flex items-center justify-center min-h-[180px] sm:min-h-[260px]">
-                      <ImagePreview
-                        src={selectedCert.image}
-                        alt={selectedCert.title[locale] || selectedCert.title.id}
-                        maxHeightClassName={isZoomed ? "max-h-none" : "max-h-[45dvh] sm:max-h-[65vh]"}
-                      />
-                    </div>
-                    <div className="p-4 sm:p-6 text-left border-t border-slate-100 dark:border-navy-800 space-y-2">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="font-semibold text-orange-600 dark:text-orange-400">
-                          {selectedCert.organization}
-                        </span>
-                        <span className="text-slate-500 font-mono">
-                          {selectedCert.dateObtained}
-                        </span>
+            {/* Modal Body / Image Viewer (Scrollable) */}
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3 sm:p-6 bg-slate-100/60 dark:bg-navy-950/60">
+              <div className="w-full flex justify-center py-1 sm:py-2">
+                <div className="w-full max-w-3xl rounded-2xl overflow-hidden border border-slate-200 dark:border-navy-800 bg-white dark:bg-navy-900 flex flex-col shadow-lg">
+                  {selectedCert.image ? (
+                    <div className="w-full flex flex-col">
+                      {/* Image Box with Zoom Interaction */}
+                      <div
+                        onClick={() => setIsZoomed((prev) => !prev)}
+                        className={cn(
+                          "group relative w-full bg-slate-950/90 flex items-center justify-center p-2 sm:p-4 select-none transition-all duration-300",
+                          isZoomed
+                            ? "cursor-zoom-out overflow-auto py-8 sm:py-12"
+                            : "cursor-zoom-in overflow-hidden min-h-[200px] sm:min-h-[280px]"
+                        )}
+                        title={isZoomed ? t.certificates.zoomOut : t.certificates.zoomIn}
+                      >
+                        <img
+                          src={selectedCert.image}
+                          alt={selectedCert.title[locale] || selectedCert.title.id}
+                          className={cn(
+                            "object-contain transition-transform duration-300 select-none",
+                            isZoomed
+                              ? "w-auto max-w-none max-h-none scale-125 sm:scale-150 cursor-zoom-out"
+                              : "h-auto w-auto max-w-full max-h-[45dvh] sm:max-h-[60vh] cursor-zoom-in"
+                          )}
+                        />
+                        {/* Interactive hint badge */}
+                        <div className="absolute bottom-3 right-3 z-10 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-navy-950/80 backdrop-blur-md text-white text-[11px] font-medium border border-white/10 shadow-sm">
+                            {isZoomed ? (
+                              <>
+                                <ZoomOut className="w-3.5 h-3.5 text-orange-400" />
+                                {t.certificates.zoomOut}
+                              </>
+                            ) : (
+                              <>
+                                <ZoomIn className="w-3.5 h-3.5 text-orange-400" />
+                                {t.certificates.zoomIn}
+                              </>
+                            )}
+                          </span>
+                        </div>
                       </div>
+
+                      {/* Text info */}
+                      <div className="p-4 sm:p-6 text-left border-t border-slate-100 dark:border-navy-800 space-y-2">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-semibold text-orange-600 dark:text-orange-400">
+                            {selectedCert.organization}
+                          </span>
+                          <span className="text-slate-500 font-mono">
+                            {selectedCert.dateObtained}
+                          </span>
+                        </div>
+                        {selectedCert.description && (
+                          <p className="text-body text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                            {selectedCert.description[locale] || selectedCert.description.id}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-6 sm:p-8 flex flex-col items-center justify-center text-center">
+                      <Award className="w-16 h-16 sm:w-20 sm:h-20 text-orange-500 mb-4" />
+                      <h5 className="heading-title text-lg sm:text-xl text-slate-900 dark:text-white mb-1">
+                        {selectedCert.title[locale] || selectedCert.title.id}
+                      </h5>
+                      <p className="text-xs sm:text-sm font-semibold text-orange-600 dark:text-orange-400 mb-3">
+                        {t.certificates.organizer}: {selectedCert.organization}
+                      </p>
                       {selectedCert.description && (
-                        <p className="text-body text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                        <p className="text-body text-xs text-slate-600 dark:text-slate-300 max-w-lg mb-4">
                           {selectedCert.description[locale] || selectedCert.description.id}
                         </p>
                       )}
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-navy-800 text-xs font-mono text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
+                        <Calendar className="w-3.5 h-3.5 text-orange-500" />
+                        {t.certificates.dateObtained}: {selectedCert.dateObtained}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="p-6 sm:p-8 flex flex-col items-center justify-center">
-                    <Award className="w-16 h-16 sm:w-20 sm:h-20 text-orange-500 mb-4" />
-                    <h5 className="heading-title text-lg sm:text-xl text-slate-900 dark:text-white mb-1">
-                      {selectedCert.title[locale] || selectedCert.title.id}
-                    </h5>
-                    <p className="text-xs sm:text-sm font-semibold text-orange-600 dark:text-orange-400 mb-3">
-                      {t.certificates.organizer}: {selectedCert.organization}
-                    </p>
-                    {selectedCert.description && (
-                      <p className="text-body text-xs text-slate-600 dark:text-slate-300 max-w-lg mb-4">
-                        {selectedCert.description[locale] || selectedCert.description.id}
-                      </p>
-                    )}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-navy-800 text-xs font-mono text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
-                      <Calendar className="w-3.5 h-3.5 text-orange-500" />
-                      {t.certificates.dateObtained}: {selectedCert.dateObtained}
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="px-4 py-2.5 sm:px-6 sm:py-3 border-t border-slate-200 dark:border-navy-800 bg-slate-50/80 dark:bg-navy-950/80 flex items-center justify-between text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 shrink-0">
+            <div className="shrink-0 px-4 py-2.5 sm:px-6 sm:py-3 border-t border-slate-200 dark:border-navy-800 bg-slate-50/90 dark:bg-navy-950/90 flex items-center justify-between text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 z-10">
               <span className="truncate mr-2">{t.certificates.modalHint}</span>
               <button
                 type="button"
