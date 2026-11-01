@@ -1,0 +1,9 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept 1: Apex Stealth - Razor-sharp geometric A with upward momentum -->
+  <!-- Left Wing -->
+  <path d="M128 26L36 226H82L128 126V26Z" fill="#FFFFFF"/>
+  <!-- Right Wing (Subtle architectural facet tone: pure white with crisp contrast) -->
+  <path d="M128 26L220 226H174L128 126V26Z" fill="#F0F4F8"/>
+  <!-- Floating Precision Crossbar (Upward Chevron) -->
+  <path d="M72 176L128 136L184 176L170 196L128 166L86 196L72 176Z" fill="#FFFFFF"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><title>Arif</title><g transform="translate(-8.32 -5.12) scale(1.065)" fill="none">
+  
+  <!-- Left Wing -->
+  <path d="M128 24L36 226H84L128 126V24Z" fill="#FFFFFF"/>
+  <!-- Right Wing -->
+  <path d="M128 24L220 226H172L128 126V24Z" fill="#E2E8F0"/>
+  <!-- Precision Floating Crossbar Chevron -->
+  <path d="M68 180L128 138L188 180L174 200L128 168L82 200L68 180Z" fill="#FFFFFF"/>
+</g></svg>

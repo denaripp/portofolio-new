@@ -1,0 +1,12 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>Zustand logo</title>
+<circle cx="64" cy="68" r="36" fill="#F59E0B"/>
+<circle cx="192" cy="68" r="36" fill="#F59E0B"/>
+<circle cx="64" cy="68" r="18" fill="#78350F"/>
+<circle cx="192" cy="68" r="18" fill="#78350F"/>
+<circle cx="128" cy="140" r="88" fill="#F59E0B"/>
+<ellipse cx="128" cy="162" rx="42" ry="34" fill="#FEF3C7"/>
+<circle cx="96" cy="122" r="10" fill="#171918"/>
+<circle cx="160" cy="122" r="10" fill="#171918"/>
+<ellipse cx="128" cy="152" rx="14" ry="10" fill="#78350F"/>
+</svg>

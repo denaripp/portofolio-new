@@ -1,42 +1,59 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { CommandPaletteProvider } from "@/components/CommandPalette";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { portfolioData } from "@/data/portfolio";
 
-const jakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-jakarta",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Modern Professional Portfolio",
-  description:
-    "Personal professional portfolio showcasing identity, technical capabilities, projects, and certificates.",
+  title: `${portfolioData.profile.firstName} — ${portfolioData.profile.role}`,
+  description: portfolioData.profile.heroSubheadline,
+  icons: {
+    icon: "/assets/logo.svg",
+    shortcut: "/assets/logo.svg",
+    apple: "/assets/brand/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html
-      lang="id" data-scroll-behavior="smooth"
+      lang="en"
+      className={`${plusJakarta.variable} ${inter.variable} dark`}
       suppressHydrationWarning
-      className={`${jakartaSans.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen bg-slate-50 dark:bg-navy-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-orange-500 selection:text-white">
+      <body className="min-h-screen selection:bg-[#39a875] selection:text-black">
         <ThemeProvider>
-          {children}
+          <LanguageProvider>
+            <CommandPaletteProvider>
+              <div className="flex min-h-screen flex-col">
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+            </CommandPaletteProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

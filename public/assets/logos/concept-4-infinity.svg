@@ -1,0 +1,9 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Infinity Apex Logo</title>
+  <!-- Continuous Bold Monoline Ribbon A with Rounded Terminals -->
+  <path d="M44 220L117 38C121 28 135 28 139 38L212 220" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Flowing Crossbar Loop -->
+  <path d="M74 154H182" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round"/>
+  <!-- Core Focal Center Glow Dot -->
+  <circle cx="128" cy="98" r="8" fill="#39A875"/>
+</svg>
