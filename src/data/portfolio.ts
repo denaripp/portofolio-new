@@ -101,7 +101,7 @@ export const portfolioData = {
     role: "Vibe Coder Fullstack",
     secondaryRole: "Full Stack Developer & System Architect",
     heroHeadlinePrefix: "Hi, I'm",
-    heroHighlightName: "Arip",
+    heroHighlightName: "Arif",
     heroTitle: "Vibe Coder Fullstack",
     heroSubheadline:
       "I help teams ship high-velocity products with confidence through AI-augmented fullstack engineering, clean system architecture, and automated testing.",
