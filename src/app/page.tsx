@@ -1,13 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
+import { ZoomIn } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { SubtleGrid } from "@/components/SubtleGrid";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ContactBanner } from "@/components/ContactBanner";
 import { TechStackBar } from "@/components/TechLogo";
+import { CertificateLightbox, type CertificateModalData } from "@/components/CertificateLightbox";
 import { useTheme } from "@/context/ThemeContext";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -71,6 +73,7 @@ const listItemVariants: Variants = {
 export default function HomePage() {
   const { isBlack } = useTheme();
   const { t } = useLanguage();
+  const [selectedCert, setSelectedCert] = useState<CertificateModalData | null>(null);
   const featuredProjects = portfolioData.projects.filter((p) => p.featured);
 
   return (
@@ -282,24 +285,36 @@ export default function HomePage() {
                 }`}
               >
                 <div className="flex items-center gap-[16px]">
-                  {/* Organization Logo */}
-                  <div
-                    className="relative size-[44px] shrink-0 overflow-hidden rounded-[12px] border border-[#262626]/40 flex items-center justify-center p-1"
-                    style={{ width: 44, height: 44, minWidth: 44 }}
+                  {/* Organization Logo / Thumbnail Trigger */}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCert(exp)}
+                    title="Klik untuk memperbesar sertifikat"
+                    aria-label={`Lihat sertifikat ${exp.role}`}
+                    className={`group/thumb relative size-[46px] shrink-0 overflow-hidden rounded-[12px] border p-1 transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 flex items-center justify-center ${
+                      isBlack
+                        ? "border-[#262626] bg-[#141414] hover:border-[#39a875] hover:shadow-[0_0_12px_rgba(57,168,117,0.3)]"
+                        : "border-[#e0e0e0] bg-white hover:border-[#39a875] hover:shadow-[0_0_12px_rgba(57,168,117,0.2)]"
+                    }`}
+                    style={{ width: 46, height: 46, minWidth: 46 }}
                   >
                     <img
                       alt={exp.organization}
                       width={38}
                       height={38}
-                      className="pointer-events-none size-full object-contain"
+                      className="size-full object-contain transition-transform duration-200 group-hover/thumb:scale-110"
                       src={exp.logoImage || `/assets/org/${exp.logoVariant}.png`}
                     />
-                  </div>
+                    <div className="absolute inset-0 bg-black/45 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center rounded-[11px]">
+                      <ZoomIn className="size-3.5 text-[#39a875]" />
+                    </div>
+                  </button>
 
                   {/* Role Details */}
                   <div className="flex flex-col items-start gap-[6px]">
                     <h3
-                      className={`font-display text-[18px] tracking-[-0.4px] ${
+                      onClick={() => setSelectedCert(exp)}
+                      className={`font-display text-[18px] tracking-[-0.4px] cursor-pointer transition-colors hover:text-[#39a875] ${
                         isBlack ? "text-white" : "text-[#171918]"
                       }`}
                     >
@@ -347,6 +362,13 @@ export default function HomePage() {
 
       {/* 4. Contact CTA Banner */}
       <ContactBanner />
+
+      {/* Certificate Lightbox Modal */}
+      <CertificateLightbox
+        isOpen={!!selectedCert}
+        certificate={selectedCert}
+        onClose={() => setSelectedCert(null)}
+      />
     </div>
   );
 }

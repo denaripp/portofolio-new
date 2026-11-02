@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, ArrowRight, Globe } from "lucide-react";
+import { Sun, Moon, ArrowRight, Globe, X } from "lucide-react";
 import { portfolioData, getWhatsAppUrl } from "@/data/portfolio";
 import { useTheme } from "@/context/ThemeContext";
 import { useLanguage } from "@/context/LanguageContext";
@@ -235,13 +235,14 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`rounded border px-2 py-1 text-[11px] font-mono-ui transition-colors ${
+                  aria-label="Tutup navigasi"
+                  className={`flex size-7 items-center justify-center rounded border transition-colors ${
                     isBlack
                       ? "border-[#262626] bg-black text-[#858786] hover:border-[#39a875] hover:text-white"
                       : "border-[#e0e0e0] bg-[#f7f7f7] text-[#777a78] hover:border-[#39a875] hover:text-black"
                   }`}
                 >
-                  ESC
+                  <X className="size-3.5 stroke-[2.5]" />
                 </button>
               </div>
 

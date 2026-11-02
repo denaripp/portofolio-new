@@ -1,17 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Download, Printer, Mail, MapPin } from "lucide-react";
+import { Download, Printer, Mail, MapPin, ZoomIn } from "lucide-react";
 import { portfolioData, getWhatsAppUrl } from "@/data/portfolio";
 import { SubtleGrid } from "@/components/SubtleGrid";
 import { TechLogoBadge } from "@/components/TechLogo";
+import { CertificateLightbox, type CertificateModalData } from "@/components/CertificateLightbox";
 import { useTheme } from "@/context/ThemeContext";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function ResumePage() {
   const { isBlack } = useTheme();
   const { t } = useLanguage();
+  const [selectedCert, setSelectedCert] = useState<CertificateModalData | null>(null);
 
   return (
     <div
@@ -230,21 +232,33 @@ export default function ResumePage() {
                   >
                     <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                       <div className="flex items-center gap-4">
-                        <div
-                          className="relative size-[44px] shrink-0 overflow-hidden rounded-[12px] border border-[#262626]/40 flex items-center justify-center p-1"
-                          style={{ width: 44, height: 44, minWidth: 44 }}
+                        <button
+                          type="button"
+                          onClick={() => setSelectedCert(exp)}
+                          title="Klik untuk memperbesar sertifikat"
+                          aria-label={`Lihat sertifikat ${exp.role}`}
+                          className={`group/thumb relative size-[48px] shrink-0 overflow-hidden rounded-[12px] border p-1 transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 flex items-center justify-center ${
+                            isBlack
+                              ? "border-[#262626] bg-[#141414] hover:border-[#39a875] hover:shadow-[0_0_12px_rgba(57,168,117,0.3)]"
+                              : "border-[#e0e0e0] bg-white hover:border-[#39a875] hover:shadow-[0_0_12px_rgba(57,168,117,0.2)]"
+                          }`}
+                          style={{ width: 48, height: 48, minWidth: 48 }}
                         >
                           <img
                             alt={exp.organization}
-                            width={38}
-                            height={38}
-                            className="pointer-events-none size-full object-contain"
+                            width={40}
+                            height={40}
+                            className="size-full object-contain transition-transform duration-200 group-hover/thumb:scale-110"
                             src={exp.logoImage || `/assets/org/${exp.logoVariant}.png`}
                           />
-                        </div>
+                          <div className="absolute inset-0 bg-black/45 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center rounded-[11px]">
+                            <ZoomIn className="size-3.5 text-[#39a875]" />
+                          </div>
+                        </button>
                         <div>
                           <h4
-                            className={`font-display text-[18px] ${
+                            onClick={() => setSelectedCert(exp)}
+                            className={`font-display text-[18px] cursor-pointer transition-colors hover:text-[#39a875] ${
                               isBlack ? "text-white" : "text-[#171918]"
                             }`}
                           >
@@ -447,6 +461,13 @@ export default function ResumePage() {
           </div>
         </div>
       </section>
+
+      {/* Certificate Lightbox Modal */}
+      <CertificateLightbox
+        isOpen={!!selectedCert}
+        certificate={selectedCert}
+        onClose={() => setSelectedCert(null)}
+      />
     </div>
   );
 }
