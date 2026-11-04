@@ -282,6 +282,84 @@ export const portfolioData = {
   // =========================================================================
   projects: [
     {
+      slug: "swiss-porfolio",
+      title: "Swiss Portfolio — Digital Marketing Specialist",
+      titleEn: "Swiss Portfolio — Digital Marketing Specialist Showcase",
+      year: "2026",
+      category: "Multi Page",
+      categories: ["Multi Page", "Landing Page"],
+      featured: true,
+      summary:
+        "Website portofolio dwibahasa modern untuk Digital Marketing Specialist berbasis arsitektur Swiss Modernism, data ledgers, dan floating capsule navigation.",
+      summaryEn:
+        "A bilingual performance marketing portfolio built with Swiss editorial typography, real-time i18n, and floating dock navigation.",
+      description:
+        "Swiss Portfolio adalah platform portofolio multi-halaman berkinerja tinggi untuk spesialis pemasaran digital. Dibangun dengan React 19, Vite, dan Tailwind CSS v4, website ini menggabungkan prinsip Swiss Editorial Design yang lugas, sistem dwibahasa (ID/EN) reaktif tanpa reload, masking text animations, dan struktur studi kasus 7-bagian yang terukur.",
+      descriptionEn:
+        "Swiss Portfolio is a high-performance, multi-page portfolio engineered for digital marketing specialists. Built with React 19, Vite, and Tailwind CSS v4, it features strict Swiss Editorial typography, reactive real-time bilingual support (ID/EN), precision text masking animations, and structured data-driven case studies.",
+      role: "Frontend Engineer & UI Designer",
+      roleEn: "Frontend Engineer & UI Designer",
+      duration: "2026",
+      durationEn: "2026",
+      clientOrContext: "Showcase & Portfolio Template",
+      clientOrContextEn: "Showcase & Portfolio Template",
+      coverImage: "/assets/projects/swiss-porfolio.webp",
+      techStack: [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Vite",
+        "GitHub",
+        "Vercel",
+      ],
+      liveUrl: "https://swiss-porfolio.vercel.app/",
+      repoUrl: "https://github.com/denaripp/swiss-porfolio",
+      challengeTitle: "Menghadirkan Portofolio Data-Driven Anti-AI-Slop",
+      challengeTitleEn: "Authentic Data-Driven Design without AI Slop",
+      challenge:
+        "Banyak portofolio pemasaran digital menggunakan template generik dengan metrik palsu dan visual yang seragam. Tantangannya adalah merancang identitas visual tajam berbasis Swiss Editorial, mengintegrasikan alur multi-halaman yang cepat, dan menjaga konsistensi dwibahasa tanpa merusak performa.",
+      challengeEn:
+        "Most digital marketing portfolios rely on generic templates with exaggerated claims and repetitive visuals. The goal was to build a disciplined Swiss Editorial design system with true multi-page SPA routing, reactive i18n, and measurable case study structures.",
+      solutionTitle: "Arsitektur Swiss Modernism & Reaktif Dwibahasa",
+      solutionTitleEn: "Swiss Modernism Architecture & Reactive i18n",
+      solution:
+        "Menerapkan palet monokrom tajam (Ink, White, Cobalt Accent), floating frosted capsule navigation yang seimbang, transisi halaman instan, serta pemisahan data terisolasi untuk memudahkan pembaruan profil, pengalaman, dan studi kasus.",
+      solutionEn:
+        "Implemented high-contrast editorial typography, a balanced floating capsule dock, smooth page transitions without layout traps, and cleanly separated data files for seamless maintenance.",
+      keyFeatures: [
+        "Sistem Dwibahasa (ID/EN) reaktif via React Context & LocalStorage tanpa refresh halaman",
+        "Floating Frosted Dock Capsule dengan active page pill dan responsif mobile",
+        "Masking Text & Stagger Viewport Animations yang smooth dan teroptimasi",
+        "Halaman Studi Kasus 7-bagian dengan metrik performa kampanye terukur",
+        "Modal Sertifikat interaktif dengan keyboard esc & backdrop blur",
+      ],
+      keyFeaturesEn: [
+        "Reactive bilingual system (ID/EN) powered by React Context and LocalStorage",
+        "Floating frosted dock navigation with active page state and mobile drawer",
+        "Smooth masking text and stagger animations with zero layout shift",
+        "Structured 7-part marketing case study layouts with measurable metrics",
+        "Interactive certificate preview modal with keyboard navigation",
+      ],
+      architectureHighlights: [
+        "React 19 + Vite bundler untuk build time super cepat (< 400ms)",
+        "Tailwind CSS v4 engine dengan konfigurasi tema monokrom presisi",
+        "Framer Motion layout animations dengan WCAG motion compliance",
+        "Vercel SPA rewrite deployment via vercel.json",
+      ],
+      architectureHighlightsEn: [
+        "React 19 + Vite bundler with sub-400ms compilation speed",
+        "Tailwind CSS v4 engine with precision editorial typography scales",
+        "Framer Motion transitions compliant with prefers-reduced-motion",
+        "Vercel SPA rewrites configured for zero 404 route errors",
+      ],
+      metrics: [
+        { label: "Build Speed", labelEn: "Build Speed", value: "< 400ms" },
+        { label: "Lighthouse Score", labelEn: "Lighthouse Score", value: "100%" },
+        { label: "Bilingual Coverage", labelEn: "Bilingual Coverage", value: "100% ID/EN" },
+      ],
+    },
+    {
       slug: "nusastay",
       title: "NusaStay — Website Penginapan Boutique",
       titleEn: "NusaStay — Boutique Hospitality Website",
