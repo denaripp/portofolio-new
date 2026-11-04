@@ -340,7 +340,7 @@ export const portfolioData = {
       title: "Bouniebread - Website Catering Kue",
       year: "2025",
       category: "Multi Page",
-      categories: ["Multi Page", "Marketplace"],
+      categories: ["Multi Page"],
       featured: true,
       summary:
         "Website company profile untuk Bounie Bread, bisnis catering & bakery yang menampilkan menu, paket catering, dan pemesanan online.",

@@ -68,9 +68,9 @@ const translations: Record<Language, Record<string, string>> = {
     "about.bioPara1":
       "Hello! I'm Muhammad Najwa Syarif (known as Arif), a Software Engineer and Vibe Coder Fullstack based in Indonesia. I specialize in turning complex product visions and Figma designs into production-ready software with exceptional speed, system architecture, and automated verification.",
     "about.bioPara2":
-      "With an academic foundation in Informatics Engineering and hands-on experience ranging from national-scale QA automation at BAZNAS to building and founding commercial solutions at Lumi Beta Works, I bridge the gap between polished user experiences and resilient backend architectures.",
+      "My engineering approach prioritizes clean code and efficiency: combining Next.js, TypeScript, Tailwind CSS, and fluid Framer Motion animations. The result is a web application that is not only visually modern and responsive across all devices, but also lightweight, bloat-free, and easily scalable.",
     "about.bioPara3":
-      "My engineering philosophy leverages the velocity of AI-augmented workflows without ever compromising code quality: zero bloat, strict TypeScript types, solid PostgreSQL schemas, and comprehensive Playwright automated test suites.",
+      "As a Vibe Coder, I leverage modern AI-augmented workflows to accelerate the MVP development lifecycle without sacrificing quality: clean system architecture, pixel-perfect 1:1 interfaces, and optimal web performance.",
     "about.location": "Location",
     "about.locationValue": "Indonesia",
     "about.experience": "Experience",
@@ -165,9 +165,9 @@ const translations: Record<Language, Record<string, string>> = {
     "about.bioPara1":
       "Halo! Saya Muhammad Najwa Syarif (akrab disapa Arif), seorang Pengembang Perangkat Lunak & Vibe Coder Fullstack yang berdomisili di Indonesia. Saya berspesialisasi dalam mewujudkan ide produk dan desain Figma menjadi aplikasi web siap produksi dengan kecepatan tinggi, arsitektur sistem yang rapi, dan verifikasi otomatis.",
     "about.bioPara2":
-      "Dengan fondasi akademis di bidang Teknik Informatika serta pengalaman praktis mulai dari arsitektur otomatisasi QA di BAZNAS hingga mendirikan serta mengembangkan solusi digital komersial di Lumi Beta Works, saya menghubungkan pengalaman pengguna yang estetis dengan sistem backend yang tangguh.",
+      "Pendekatan rekayasa saya mengutamakan clean code dan efisiensi: mengombinasikan ekosistem Next.js, TypeScript, Tailwind CSS, serta sentuhan animasi Framer Motion yang halus. Hasilnya adalah website yang tidak hanya berpenampilan modern dan responsif di semua perangkat, tetapi juga ringan tanpa bloatware serta mudah dikembangkan ke depan.",
     "about.bioPara3":
-      "Pendekatan rekayasa saya memadukan kecepatan alur kerja bertenaga AI dengan standar kualitas software tanpa kompromi: zero bloat, type safety yang ketat di TypeScript, skema PostgreSQL yang terstruktur, dan rangkaian tes otomatis Playwright yang komprehensif.",
+      "Sebagai Vibe Coder, saya memanfaatkan alur kerja modern berbasis AI untuk mempercepat siklus pembuatan MVP tanpa mengorbankan kualitas: arsitektur sistem tetap rapi, antarmuka presisi 1:1, dan performa web optimal.",
     "about.location": "Lokasi",
     "about.locationValue": "Indonesia",
     "about.experience": "Pengalaman",
