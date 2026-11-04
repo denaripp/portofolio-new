@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Download, Printer, Mail, MapPin, ZoomIn } from "lucide-react";
-import { portfolioData, getWhatsAppUrl } from "@/data/portfolio";
+import { portfolioData, getWhatsAppUrl, getLocalizedProject } from "@/data/portfolio";
 import { SubtleGrid } from "@/components/SubtleGrid";
 import { TechLogoBadge } from "@/components/TechLogo";
 import { CertificateLightbox, type CertificateModalData } from "@/components/CertificateLightbox";
@@ -12,7 +12,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 export default function ResumePage() {
   const { isBlack } = useTheme();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [selectedCert, setSelectedCert] = useState<CertificateModalData | null>(null);
 
   return (
@@ -339,47 +339,50 @@ export default function ResumePage() {
               </div>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {portfolioData.projects.map((proj) => (
-                  <Link
-                    key={proj.slug}
-                    href={`/projects/${proj.slug}`}
-                    className={`group flex flex-col justify-between rounded-[12px] border p-5 transition-all hover:border-[#39a875] ${
-                      isBlack
-                        ? "border-[#1a1a1a] bg-black"
-                        : "border-[#e5e5e5] bg-white shadow-xs"
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <h4
-                          className={`font-display text-[18px] transition-colors group-hover:text-[#39a875] ${
-                            isBlack ? "text-white" : "text-[#171918]"
-                          }`}
-                        >
-                          {proj.title}
-                        </h4>
-                        <span className="font-mono-ui text-[12px] text-[#858786]">
-                          {proj.year}
-                        </span>
+                {portfolioData.projects.map((proj) => {
+                  const item = getLocalizedProject(proj, lang);
+                  return (
+                    <Link
+                      key={item.slug}
+                      href={`/projects/${item.slug}`}
+                      className={`group flex flex-col justify-between rounded-[12px] border p-5 transition-all hover:border-[#39a875] ${
+                        isBlack
+                          ? "border-[#1a1a1a] bg-black"
+                          : "border-[#e5e5e5] bg-white shadow-xs"
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <h4
+                            className={`font-display text-[18px] transition-colors group-hover:text-[#39a875] ${
+                              isBlack ? "text-white" : "text-[#171918]"
+                            }`}
+                          >
+                            {item.title}
+                          </h4>
+                          <span className="font-mono-ui text-[12px] text-[#858786]">
+                            {item.year}
+                          </span>
+                        </div>
+                        <p className="mt-2 font-sans-body text-[14px] leading-[22px] text-[#858786]">
+                          {item.summary}
+                        </p>
                       </div>
-                      <p className="mt-2 font-sans-body text-[14px] leading-[22px] text-[#858786]">
-                        {proj.summary}
-                      </p>
-                    </div>
 
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {proj.techStack.map((t) => (
-                        <TechLogoBadge
-                          key={t}
-                          name={t}
-                          size="sm"
-                          showLabel={true}
-                          className={isBlack ? "bg-black" : "bg-white"}
-                        />
-                      ))}
-                    </div>
-                  </Link>
-                ))}
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {item.techStack.map((t) => (
+                          <TechLogoBadge
+                            key={t}
+                            name={t}
+                            size="sm"
+                            showLabel={true}
+                            className={isBlack ? "bg-black" : "bg-white"}
+                          />
+                        ))}
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 

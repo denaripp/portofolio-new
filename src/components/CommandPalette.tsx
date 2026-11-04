@@ -24,7 +24,8 @@ import {
   Download,
   ArrowRight,
 } from "lucide-react";
-import { portfolioData, getWhatsAppUrl } from "@/data/portfolio";
+import { portfolioData, getWhatsAppUrl, getLocalizedProject } from "@/data/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface CommandPaletteContextType {
   isOpen: boolean;
@@ -63,6 +64,7 @@ export function CommandPaletteProvider({
   const [isOpen, setIsOpen] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const router = useRouter();
+  const { lang } = useLanguage();
 
   const openPalette = useCallback(() => setIsOpen(true), []);
   const closePalette = useCallback(() => setIsOpen(false), []);
@@ -122,18 +124,21 @@ export function CommandPaletteProvider({
           closePalette();
         },
       },
-      ...portfolioData.projects.map((project) => ({
-        id: `project-${project.slug}`,
-        label: project.title,
-        subtitle: `${project.category} · ${project.year} — ${project.summary}`,
-        group: "Case Studies" as const,
-        icon: <Sparkles className="size-4 text-[#39a875]" />,
-        keywords: [project.slug, project.title, project.category, ...project.techStack],
-        onSelect: () => {
-          router.push(`/projects/${project.slug}`);
-          closePalette();
-        },
-      })),
+      ...portfolioData.projects.map((rawProject) => {
+        const project = getLocalizedProject(rawProject, lang);
+        return {
+          id: `project-${project.slug}`,
+          label: project.title,
+          subtitle: `${project.category} · ${project.year} — ${project.summary}`,
+          group: "Case Studies" as const,
+          icon: <Sparkles className="size-4 text-[#39a875]" />,
+          keywords: [project.slug, project.title, project.category, ...project.techStack],
+          onSelect: () => {
+            router.push(`/projects/${project.slug}`);
+            closePalette();
+          },
+        };
+      }),
       {
         id: "contact-whatsapp",
         label: "Chat on WhatsApp",
@@ -215,7 +220,7 @@ export function CommandPaletteProvider({
         },
       },
     ],
-    [router, copiedEmail, closePalette]
+    [router, copiedEmail, closePalette, lang]
   );
 
   // Global keyboard shortcut to toggle palette (attached once!)

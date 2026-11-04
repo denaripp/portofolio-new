@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink, CheckCircle2, Layers } from "lucide-react";
-import { ProjectItem } from "@/data/portfolio";
+import { ProjectItem, getLocalizedProject } from "@/data/portfolio";
 import { SubtleGrid } from "@/components/SubtleGrid";
 import { ContactBanner } from "@/components/ContactBanner";
 import { TechLogoBadge } from "@/components/TechLogo";
@@ -18,11 +18,13 @@ interface ProjectDetailViewProps {
 }
 
 export function ProjectDetailView({
-  project,
-  nextProject,
+  project: rawProject,
+  nextProject: rawNextProject,
 }: ProjectDetailViewProps) {
   const { isBlack } = useTheme();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const project = getLocalizedProject(rawProject, lang);
+  const nextProject = getLocalizedProject(rawNextProject, lang);
 
   return (
     <div

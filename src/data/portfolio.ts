@@ -8,27 +8,67 @@ export interface TechItem {
 export interface ProjectItem {
   slug: string;
   title: string;
+  titleEn?: string;
   year: string;
   category: "Landing Page" | "Multi Page" | "Full Stack" | "Marketplace" | "UI/UX" | string;
   categories?: string[];
   featured: boolean;
   summary: string;
+  summaryEn?: string;
   description: string;
+  descriptionEn?: string;
   role: string;
+  roleEn?: string;
   duration: string;
+  durationEn?: string;
   clientOrContext: string;
+  clientOrContextEn?: string;
   coverImage?: string;
   coverVariant?: string;
   techStack: string[];
   liveUrl?: string;
   repoUrl?: string;
   challengeTitle?: string;
+  challengeTitleEn?: string;
   challenge: string;
+  challengeEn?: string;
   solutionTitle?: string;
+  solutionTitleEn?: string;
   solution: string;
+  solutionEn?: string;
   keyFeatures: string[];
+  keyFeaturesEn?: string[];
   architectureHighlights: string[];
-  metrics: { label: string; value: string }[];
+  architectureHighlightsEn?: string[];
+  metrics: { label: string; labelEn?: string; value: string }[];
+}
+
+export function getLocalizedProject(
+  project: ProjectItem,
+  lang: "id" | "en"
+): ProjectItem {
+  if (lang !== "en") return project;
+
+  return {
+    ...project,
+    title: project.titleEn || project.title,
+    summary: project.summaryEn || project.summary,
+    description: project.descriptionEn || project.description,
+    role: project.roleEn || project.role,
+    duration: project.durationEn || project.duration,
+    clientOrContext: project.clientOrContextEn || project.clientOrContext,
+    challengeTitle: project.challengeTitleEn || project.challengeTitle,
+    challenge: project.challengeEn || project.challenge,
+    solutionTitle: project.solutionTitleEn || project.solutionTitle,
+    solution: project.solutionEn || project.solution,
+    keyFeatures: project.keyFeaturesEn || project.keyFeatures,
+    architectureHighlights:
+      project.architectureHighlightsEn || project.architectureHighlights,
+    metrics: project.metrics.map((m) => ({
+      label: m.labelEn || m.label,
+      value: m.value,
+    })),
+  };
 }
 
 export interface ExperienceItem {
@@ -244,17 +284,25 @@ export const portfolioData = {
     {
       slug: "nusastay",
       title: "NusaStay — Website Penginapan Boutique",
+      titleEn: "NusaStay — Boutique Hospitality Website",
       year: "2026",
       category: "Multi Page",
       categories: ["Multi Page"],
       featured: true,
       summary:
         "NusaStay adalah website penginapan boutique di Klaten, Jawa Tengah dengan alur reservasi cepat via WhatsApp.",
+      summaryEn:
+        "A boutique hospitality website in Klaten, Central Java featuring a seamless, fast reservation flow via WhatsApp.",
       description:
         "NusaStay adalah website penginapan boutique di Klaten, Jawa Tengah. Website ini membantu calon tamu melihat pilihan kamar, fasilitas, galeri, dan lokasi, lalu mengajukan reservasi dengan cepat melalui integrasi alur WhatsApp.",
+      descriptionEn:
+        "NusaStay is a boutique hospitality website crafted for travelers in Klaten, Central Java. The platform allows prospective guests to explore room tiers, amenities, visual galleries, and lodging locations, with instant reservation inquiries routed directly to WhatsApp.",
       role: "Fullstack Developer & AI-Augmented Builder",
+      roleEn: "Fullstack Developer & AI-Augmented Builder",
       duration: "2026",
+      durationEn: "2026",
       clientOrContext: "NusaStay Boutique Lodging",
+      clientOrContextEn: "NusaStay Boutique Lodging",
       coverImage: "/assets/projects/nusastay.webp",
       techStack: [
         "Next.js",
@@ -267,42 +315,67 @@ export const portfolioData = {
       liveUrl: "https://nusastay.vercel.app/",
       repoUrl: "https://github.com/denaripp/nusastay---dummy-project",
       challengeTitle: "Reservasi Cepat & Ramah Tamu",
+      challengeTitleEn: "Frictionless Guest Inquiries",
       challenge:
         "Penginapan boutique membutuhkan media presentasi visual yang menarik untuk kamar dan fasilitasnya, sekaligus cara termudah bagi calon tamu untuk melakukan konfirmasi ketersediaan kamar tanpa friksi pembayaran di muka yang rumit.",
+      challengeEn:
+        "Boutique lodgings need a captivating visual showcase for their rooms while providing guests with an effortless way to check availability without the overhead of complex payment gateways.",
       solutionTitle: "Alur Terintegrasi WhatsApp",
+      solutionTitleEn: "Direct WhatsApp Flow",
       solution:
         "Membangun website modern dengan Next.js yang memuat galeri kamar secara interaktif dan menyediakan form pemesanan langsung yang memformat pesan otomatis ke nomor WhatsApp pengelola.",
+      solutionEn:
+        "Engineered a fast, modern Next.js website featuring interactive room galleries and a booking form that auto-formats reservations directly into structured WhatsApp messages.",
       keyFeatures: [
         "Showcase Kamar & Fasilitas Interaktif",
         "Direct WhatsApp Reservation Flow",
         "Peta Lokasi & Informasi Akomodasi Lengkap",
         "Desain Mobile-First & Responsif Cepat",
       ],
+      keyFeaturesEn: [
+        "Interactive Room & Amenities Showcase",
+        "Direct WhatsApp Reservation Engine",
+        "Location Map & Comprehensive Lodging Guide",
+        "Mobile-First & Ultra-Responsive Layout",
+      ],
       architectureHighlights: [
         "Next.js App Router dengan performa rendering optimal",
         "Tailwind CSS dengan palet desain hospitality yang hangat",
         "Deep link generator ke WhatsApp API tanpa perantara pihak ketiga",
       ],
+      architectureHighlightsEn: [
+        "Next.js App Router for optimal load performance",
+        "Tailwind CSS with a warm hospitality aesthetic",
+        "Direct deep link generator to WhatsApp API without third-party middle layers",
+      ],
       metrics: [
-        { label: "Platform", value: "Next.js" },
-        { label: "Status", value: "Completed" },
-        { label: "Deployment", value: "Vercel" },
+        { label: "Platform", labelEn: "Platform", value: "Next.js" },
+        { label: "Status", labelEn: "Status", value: "Completed" },
+        { label: "Deployment", labelEn: "Deployment", value: "Vercel" },
       ],
     },
     {
       slug: "corelabb",
       title: "Corelabb - Landing Page IT SERCVICE",
+      titleEn: "Corelabb — IT Services & Software Agency",
       year: "2025",
       category: "Landing Page",
       categories: ["Landing Page"],
       featured: true,
       summary:
         "Website company profile untuk Corelab, penyedia layanan IT seperti software development, konsultasi teknologi, dan solusi digital.",
+      summaryEn:
+        "A modern company profile for Corelabb, showcasing custom software engineering, tech consulting, and enterprise digital solutions.",
       description:
         "Website company profile untuk Corelab, penyedia layanan IT seperti pengembangan software, konsultasi teknologi, dan solusi digital untuk bisnis dengan tampilan modern dan profesional.",
+      descriptionEn:
+        "A sleek company profile for Corelabb, an IT solutions provider specializing in bespoke software development, cloud infrastructure, and enterprise IT consulting with a crisp, authoritative aesthetic.",
       role: "Frontend Developer",
+      roleEn: "Frontend Developer",
       duration: "2025",
+      durationEn: "2025",
       clientOrContext: "Corelabb IT Services",
+      clientOrContextEn: "Corelabb IT Services",
       coverImage: "/assets/projects/corelabb.webp",
       techStack: [
         "Tailwind CSS",
@@ -313,42 +386,67 @@ export const portfolioData = {
       liveUrl: "https://corelab2.netlify.app/",
       repoUrl: "https://github.com/denaripp/corelabb",
       challengeTitle: "Kredibilitas Layanan Digital",
+      challengeTitleEn: "Establishing Digital Authority",
       challenge:
         "Agensi penyedia solusi IT membutuhkan etalase digital yang menonjolkan profesionalitas, portofolio teknologi, dan cakupan layanan pengembangan software secara ringkas dan meyakinkan.",
+      challengeEn:
+        "An emerging IT agency needed a digital storefront that clearly communicates technical rigor, service tiers, and service reliability to potential business clients.",
       solutionTitle: "Landing Page Modern & Interaktif",
+      solutionTitleEn: "Modern & Interactive Landing Page",
       solution:
         "Mengembangkan landing page company profile berkecepatan tinggi dengan Tailwind CSS yang menyajikan daftar layanan IT, keunggulan teknologi, dan tombol konsultasi langsung.",
+      solutionEn:
+        "Crafted a blazingly fast landing page with Tailwind CSS, highlighting core technical services, credibility badges, and instant consultation call-to-actions.",
       keyFeatures: [
         "Daftar Layanan Solusi Digital & Software",
         "Tampilan Kredibel dengan Tema IT Modern",
         "Direct Consultation Call to Action",
         "Akses Cepat & Ringan di Semua Perangkat",
       ],
+      keyFeaturesEn: [
+        "Digital & Software Solutions Catalog",
+        "Credible Aesthetic with Modern Tech Theme",
+        "Direct Consultation Call to Action",
+        "Lightweight & Fast Access Across All Devices",
+      ],
       architectureHighlights: [
         "Struktur HTML5 semantik dan performa loading instan",
         "Tailwind CSS utility-first styling yang rapi",
         "Continuous deployment otomatis via Netlify",
       ],
+      architectureHighlightsEn: [
+        "Semantic HTML5 structure with instant loading performance",
+        "Tailwind CSS utility-first clean styling",
+        "Automated continuous deployment via Netlify",
+      ],
       metrics: [
-        { label: "Stack", value: "Tailwind CSS" },
-        { label: "Status", value: "Completed" },
-        { label: "Hosting", value: "Netlify" },
+        { label: "Stack", labelEn: "Stack", value: "Tailwind CSS" },
+        { label: "Status", labelEn: "Status", value: "Completed" },
+        { label: "Hosting", labelEn: "Hosting", value: "Netlify" },
       ],
     },
     {
       slug: "bounie-bread",
       title: "Bouniebread - Website Catering Kue",
+      titleEn: "Bouniebread — Catering & Bakery Website",
       year: "2025",
       category: "Multi Page",
       categories: ["Multi Page"],
       featured: true,
       summary:
         "Website company profile untuk Bounie Bread, bisnis catering & bakery yang menampilkan menu, paket catering, dan pemesanan online.",
+      summaryEn:
+        "A multi-page brand website and digital catalog for Bounie Bread, an artisanal bakery & catering service featuring menus and online ordering.",
       description:
         "Website company profile untuk Bounie Bread, bisnis catering & bakery yang menampilkan menu, paket catering, dan sistem pemesanan online dengan navigasi yang responsif.",
+      descriptionEn:
+        "A multi-page brand website for Bounie Bread, an artisanal bakery & catering business showcasing freshly baked selections, catering packages, and direct ordering with responsive navigation.",
       role: "Frontend Developer",
+      roleEn: "Frontend Developer",
       duration: "2025",
+      durationEn: "2025",
       clientOrContext: "Bounie Bread Bakery & Catering",
+      clientOrContextEn: "Bounie Bread Bakery & Catering",
       coverImage: "/assets/projects/bouniebread.webp",
       techStack: [
         "HTML",
@@ -360,26 +458,43 @@ export const portfolioData = {
       liveUrl: "https://bounie-bread.vercel.app/",
       repoUrl: "https://github.com/denaripp/bounie-bread",
       challengeTitle: "Digitalisasi Katalog Bakery",
+      challengeTitleEn: "Digitalizing Bakery Menus",
       challenge:
         "Bisnis bakery & catering rumahan memerlukan media digital untuk memajang varian roti dan paket pesanan partai besar tanpa harus mengirim foto katalog manual berulang kali.",
+      challengeEn:
+        "A homemade bakery & catering business needed a digital medium to showcase their artisanal breads and bulk catering packages without repeatedly sending manual photo menus.",
       solutionTitle: "Katalog Digital Terstruktur",
+      solutionTitleEn: "Structured Digital Catalog",
       solution:
         "Membangun website katalog online yang menampilkan ragam pilihan roti, daftar harga paket catering, serta akses langsung bagi pelanggan untuk memesan secara daring.",
+      solutionEn:
+        "Built an intuitive online catalog displaying variety of breads, catering price packages, and direct ordering channels for customers.",
       keyFeatures: [
         "Katalog Menu Bakery & Varian Kue",
         "Paket Catering untuk Berbagai Acara",
         "Tombol Pemesanan Online Cepat",
         "Desain Bersih & Navigasi Mudah",
       ],
+      keyFeaturesEn: [
+        "Artisanal Bakery & Pastry Menu Catalog",
+        "Catering Packages for Events & Gatherings",
+        "Quick Online Ordering Call to Action",
+        "Clean Aesthetic & Intuitive Navigation",
+      ],
       architectureHighlights: [
         "Lightweight static web architecture tanpa dependensi berat",
         "Optimasi aset gambar kue dalam format modern",
         "Hosting gratis berkecepatan tinggi di Vercel",
       ],
+      architectureHighlightsEn: [
+        "Lightweight static web architecture without heavy bloat",
+        "Optimized modern image assets for high performance",
+        "High-speed deployment on Vercel",
+      ],
       metrics: [
-        { label: "Kategori", value: "F&B Catering" },
-        { label: "Status", value: "Completed" },
-        { label: "Deployment", value: "Vercel" },
+        { label: "Kategori", labelEn: "Category", value: "F&B Catering" },
+        { label: "Status", labelEn: "Status", value: "Completed" },
+        { label: "Deployment", labelEn: "Deployment", value: "Vercel" },
       ],
     },
   ] as ProjectItem[],
