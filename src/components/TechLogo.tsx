@@ -21,6 +21,7 @@ export function TechLogoBadge({
 }: TechLogoBadgeProps) {
   const { isBlack } = useTheme();
   const resolvedLogo = logoUrl || getTechLogo(name);
+  const isVercelDark = isBlack && resolvedLogo.endsWith("/vercel.svg");
 
   const iconSizes = {
     sm: "size-[16px]",
@@ -46,7 +47,7 @@ export function TechLogoBadge({
         <img
           src={resolvedLogo}
           alt={`${name} logo`}
-          className={`${iconSizes[size]} shrink-0 object-contain transition-transform duration-200 group-hover/label:scale-110`}
+          className={`${iconSizes[size]} shrink-0 object-contain transition-transform duration-200 group-hover/label:scale-110 ${isVercelDark ? "invert" : ""}`}
         />
         <span>{name}</span>
       </span>
@@ -65,7 +66,7 @@ export function TechLogoBadge({
       <img
         src={resolvedLogo}
         alt={`${name} logo`}
-        className={`${iconSizes[size]} object-contain transition-transform duration-200 group-hover/badge:scale-110`}
+        className={`${iconSizes[size]} object-contain transition-transform duration-200 group-hover/badge:scale-110 ${isVercelDark ? "invert" : ""}`}
       />
       {/* Tooltip on Hover */}
       <span
@@ -85,42 +86,19 @@ interface TechStackBarProps {
   limit?: number;
 }
 
-const TECH_ROW_1 = [
-  { id: "nextjs", name: "Next.js", logo: "/assets/tech/nextjs.svg" },
-  { id: "typescript", name: "TypeScript", logo: "/assets/tech/typescript.svg" },
-  { id: "react", name: "React", logo: "/assets/tech/react.svg" },
-  { id: "tailwindcss", name: "Tailwind CSS", logo: "/assets/tech/tailwindcss.svg" },
-  { id: "nodejs", name: "Node.js", logo: "/assets/tech/nodejs.svg" },
-  { id: "playwright", name: "Playwright", logo: "/assets/tech/playwright.svg" },
-  { id: "python", name: "Python", logo: "/assets/tech/python.svg" },
-  { id: "vite", name: "Vite", logo: "/assets/tech/vite.svg" },
-  { id: "figma", name: "Figma", logo: "/assets/tech/figma.svg" },
-  { id: "html", name: "HTML", logo: "/assets/tech/html.svg" },
-  { id: "javascript", name: "JavaScript", logo: "/assets/tech/javascript.svg" },
-  { id: "zustand", name: "Zustand", logo: "/assets/tech/zustand.svg" },
-];
-
-const TECH_ROW_2 = [
-  { id: "postgresql", name: "PostgreSQL", logo: "/assets/tech/postgresql.svg" },
-  { id: "supabase", name: "Supabase", logo: "/assets/tech/supabase.svg" },
-  { id: "prisma", name: "Prisma", logo: "/assets/tech/prisma.svg" },
-  { id: "nestjs", name: "NestJS", logo: "/assets/tech/nestjs.svg" },
-  { id: "laravel", name: "Laravel", logo: "/assets/tech/laravel.svg" },
-  { id: "docker", name: "Docker", logo: "/assets/tech/docker.svg" },
-  { id: "git", name: "Git", logo: "/assets/tech/git.svg" },
-  { id: "github", name: "GitHub", logo: "/assets/tech/github.svg" },
-  { id: "postman", name: "Postman", logo: "/assets/tech/postman.svg" },
-  { id: "cicd", name: "CI/CD", logo: "/assets/tech/cicd.svg" },
-  { id: "wordpress", name: "WordPress", logo: "/assets/tech/wordpress.svg" },
-  { id: "vercel", name: "Vercel", logo: "/assets/tech/vercel.svg" },
-];
-
-export function TechStackBar({ limit = 24 }: TechStackBarProps) {
+export function TechStackBar({ limit = 17 }: TechStackBarProps) {
   const { isBlack } = useTheme();
 
-  // Duplicate arrays to achieve seamless infinite loop
-  const row1Items = [...TECH_ROW_1, ...TECH_ROW_1];
-  const row2Items = [...TECH_ROW_2, ...TECH_ROW_2];
+  const items = portfolioData.techStack.slice(0, limit);
+  const splitIndex = Math.ceil(items.length / 2);
+  const baseRow1 = items.slice(0, splitIndex);
+  const baseRow2 = items.slice(splitIndex);
+
+  // Repeat each base row 3x per half so tracks cover wider viewports seamlessly at -50% loop
+  const half1 = [...baseRow1, ...baseRow1, ...baseRow1];
+  const half2 = [...baseRow2, ...baseRow2, ...baseRow2];
+  const row1Items = [...half1, ...half1];
+  const row2Items = [...half2, ...half2];
 
   return (
     <div className="marquee-group relative w-full overflow-hidden py-1">

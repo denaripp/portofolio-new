@@ -2,7 +2,7 @@ export interface TechItem {
   id: string;
   name: string;
   logo: string;
-  category: "Frontend" | "Backend" | "Database & Cloud" | "Testing & Tools";
+  category: "Frontend" | "Backend" | "Database & Cloud" | "Tools & Platforms";
 }
 
 export interface ProjectItem {
@@ -125,6 +125,10 @@ const TECH_LOGO_MAP: Record<string, string> = {
   vercel: "/assets/tech/vercel.svg",
   python: "/assets/tech/python.svg",
   wordpress: "/assets/tech/wordpress.svg",
+  "inertia.js": "/assets/tech/inertiajs.svg",
+  inertiajs: "/assets/tech/inertiajs.svg",
+  inertia: "/assets/tech/inertiajs.svg",
+  "inertia js": "/assets/tech/inertiajs.svg",
 };
 
 export function getTechLogo(techNameOrId: string): string {
@@ -165,21 +169,21 @@ export const portfolioData = {
 
   techStack: [
     {
-      id: "playwright",
-      name: "Playwright",
-      logo: "/assets/tech/playwright.svg",
-      category: "Testing & Tools",
+      id: "html",
+      name: "HTML",
+      logo: "/assets/tech/html.svg",
+      category: "Frontend",
     },
     {
-      id: "nodejs",
-      name: "Node.js",
-      logo: "/assets/tech/nodejs.svg",
-      category: "Backend",
+      id: "tailwindcss",
+      name: "Tailwind CSS",
+      logo: "/assets/tech/tailwindcss.svg",
+      category: "Frontend",
     },
     {
-      id: "typescript",
-      name: "TypeScript",
-      logo: "/assets/tech/typescript.svg",
+      id: "javascript",
+      name: "JavaScript",
+      logo: "/assets/tech/javascript.svg",
       category: "Frontend",
     },
     {
@@ -201,34 +205,28 @@ export const portfolioData = {
       category: "Frontend",
     },
     {
+      id: "typescript",
+      name: "TypeScript",
+      logo: "/assets/tech/typescript.svg",
+      category: "Frontend",
+    },
+    {
+      id: "python",
+      name: "Python",
+      logo: "/assets/tech/python.svg",
+      category: "Backend",
+    },
+    {
+      id: "inertiajs",
+      name: "Inertia.js",
+      logo: "/assets/tech/inertiajs.svg",
+      category: "Backend",
+    },
+    {
       id: "laravel",
       name: "Laravel",
       logo: "/assets/tech/laravel.svg",
       category: "Backend",
-    },
-    {
-      id: "kotlin",
-      name: "Kotlin",
-      logo: "/assets/tech/kotlin.svg",
-      category: "Backend",
-    },
-    {
-      id: "nestjs",
-      name: "NestJS",
-      logo: "/assets/tech/nestjs.svg",
-      category: "Backend",
-    },
-    {
-      id: "postgresql",
-      name: "PostgreSQL",
-      logo: "/assets/tech/postgresql.svg",
-      category: "Database & Cloud",
-    },
-    {
-      id: "prisma",
-      name: "Prisma",
-      logo: "/assets/tech/prisma.svg",
-      category: "Database & Cloud",
     },
     {
       id: "supabase",
@@ -237,40 +235,40 @@ export const portfolioData = {
       category: "Database & Cloud",
     },
     {
-      id: "tailwindcss",
-      name: "Tailwind CSS",
-      logo: "/assets/tech/tailwindcss.svg",
-      category: "Frontend",
+      id: "postgresql",
+      name: "PostgreSQL",
+      logo: "/assets/tech/postgresql.svg",
+      category: "Database & Cloud",
     },
     {
       id: "figma",
       name: "Figma",
       logo: "/assets/tech/figma.svg",
-      category: "Testing & Tools",
+      category: "Tools & Platforms",
     },
     {
-      id: "zustand",
-      name: "Zustand",
-      logo: "/assets/tech/zustand.svg",
-      category: "Frontend",
-    },
-    {
-      id: "docker",
-      name: "Docker",
-      logo: "/assets/tech/docker.svg",
-      category: "Database & Cloud",
-    },
-    {
-      id: "postman",
-      name: "Postman",
-      logo: "/assets/tech/postman.svg",
-      category: "Testing & Tools",
+      id: "github",
+      name: "GitHub",
+      logo: "/assets/tech/github.svg",
+      category: "Tools & Platforms",
     },
     {
       id: "git",
       name: "Git",
       logo: "/assets/tech/git.svg",
-      category: "Testing & Tools",
+      category: "Tools & Platforms",
+    },
+    {
+      id: "vercel",
+      name: "Vercel",
+      logo: "/assets/tech/vercel.svg",
+      category: "Database & Cloud",
+    },
+    {
+      id: "wordpress",
+      name: "WordPress",
+      logo: "/assets/tech/wordpress.svg",
+      category: "Tools & Platforms",
     },
   ] as TechItem[],
 

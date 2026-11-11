@@ -15,7 +15,7 @@ const techCategories = [
   "Frontend",
   "Backend",
   "Database & Cloud",
-  "Testing & Tools",
+  "Tools & Platforms",
 ] as const;
 
 export default function AboutPage() {
@@ -207,7 +207,7 @@ export default function AboutPage() {
                 <Cpu className="size-4 text-[#39a875]" />
                 <span>{t("about.drivers")}</span>
               </div>
-              <TechStackBar limit={24} />
+              <TechStackBar />
 
               <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {techCategories.map((cat) => {
