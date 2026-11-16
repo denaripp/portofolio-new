@@ -573,6 +573,84 @@ export const portfolioData = {
         { label: "Deployment", labelEn: "Deployment", value: "Vercel" },
       ],
     },
+    {
+      slug: "mas-rif-outdoor",
+      title: "Mas Rif Outdoor — Platform Sewa Alat Camping",
+      titleEn: "Mas Rif Outdoor — Camping & Gear Rental Platform",
+      year: "2026",
+      category: "Full Stack",
+      categories: ["Full Stack", "Marketplace"],
+      featured: true,
+      summary:
+        "Platform web sewa alat camping & outdoor gear dengan kalkulator durasi sewa otomatis, manajemen stok real-time, dan pemesanan WhatsApp.",
+      summaryEn:
+        "An outdoor gear & camping rental platform featuring dynamic date-based rate calculations, real-time inventory management, and direct WhatsApp ordering.",
+      description:
+        "Mas Rif Outdoor adalah platform penyewaan perlengkapan camping dan pendakian gunung berbasis web modern. Dilengkapi kalkulator durasi rental otomatis, katalog paket bundling hemat, manajemen ketersediaan stok perlengkapan secara real-time via InsForge/Supabase, serta alur konfirmasi reservasi cepat langsung ke WhatsApp admin.",
+      descriptionEn:
+        "Mas Rif Outdoor is a modern web application for camping and mountaineering gear rentals. It features automated rental fee calculations based on pickup/return dates, curated value bundles, real-time equipment inventory tracking powered by InsForge/Supabase, and structured direct-to-WhatsApp booking dispatch.",
+      role: "Fullstack Developer & System Architect",
+      roleEn: "Fullstack Developer & System Architect",
+      duration: "2026",
+      durationEn: "2026",
+      clientOrContext: "Mas Rif Outdoor Rental",
+      clientOrContextEn: "Mas Rif Outdoor Rental",
+      coverImage: "/assets/projects/mas-rif-outdoor.webp",
+      techStack: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Supabase",
+        "Vercel",
+        "GitHub",
+      ],
+      liveUrl: "https://mas-rif-outdoor.vercel.app/",
+      repoUrl: "https://github.com/denaripp/mas-rif-outdoor",
+      challengeTitle: "Otomatisasi Hitung Sewa & Kontrol Stok",
+      challengeTitleEn: "Automated Rate Calculations & Inventory Tracking",
+      challenge:
+        "Bisnis rental outdoor memerlukan sistem yang mampu menghitung tarif sewa harian secara dinamis berdasarkan tanggal ambil dan kembali, memvalidasi ketersediaan stok fisik perlengkapan, serta mempermudah pelanggan mengajukan sewa tanpa sistem checkout yang kaku.",
+      challengeEn:
+        "An outdoor rental business required a system that dynamically calculates multi-day rental fees based on pickup/return schedules, tracks physical inventory limits in real-time, and enables low-friction booking without rigid payment gate friction.",
+      solutionTitle: "Katalog Interaktif Terintegrasi WhatsApp & Backend Real-Time",
+      solutionTitleEn: "Interactive Gear Catalog with Real-Time Database & WhatsApp Dispatch",
+      solution:
+        "Mengembangkan aplikasi Next.js dengan backend database InsForge/Supabase yang menyajikan katalog gear interaktif, pemilihan tanggal sewa real-time, paket bundling hemat, dan generator format pesan WhatsApp terstruktur untuk admin.",
+      solutionEn:
+        "Engineered a Next.js fullstack application backed by InsForge/Supabase, featuring responsive equipment catalogs, date picker rate calculations, value bundles, and auto-generated formatted WhatsApp orders.",
+      keyFeatures: [
+        "Katalog Alat Camping & Bundling Hemat Interaktif",
+        "Kalkulator Otomatis Tarif Sewa Berdasarkan Tanggal",
+        "Manajemen Stok & Ketersediaan Real-Time",
+        "Direct WhatsApp Booking Generator",
+        "Daftar Persiapan & Checklist Pendakian Gunung",
+      ],
+      keyFeaturesEn: [
+        "Interactive Gear Catalog & Value Package Bundles",
+        "Dynamic Multi-Day Rental Rate Calculator",
+        "Real-Time Equipment Stock & Availability Tracking",
+        "Structured Direct WhatsApp Order Generator",
+        "Hiking Preparation & Safety Checklist",
+      ],
+      architectureHighlights: [
+        "Next.js 16 App Router dengan React 19 & Tailwind CSS v4",
+        "Integrasi database InsForge / Supabase untuk persistensi katalog & pengaturan toko",
+        "FontAwesome SVG system & modular client-side state handling",
+        "Deployment otomatis dan edge caching via Vercel",
+      ],
+      architectureHighlightsEn: [
+        "Next.js 16 App Router with React 19 & Tailwind CSS v4",
+        "InsForge / Supabase database integration for live catalog & store settings",
+        "FontAwesome SVG system and optimized reactive client states",
+        "High-performance edge deployment on Vercel",
+      ],
+      metrics: [
+        { label: "Platform", labelEn: "Platform", value: "Next.js 16" },
+        { label: "Database", labelEn: "Database", value: "Supabase" },
+        { label: "Deployment", labelEn: "Deployment", value: "Vercel" },
+      ],
+    },
   ] as ProjectItem[],
 
   experiences: [
