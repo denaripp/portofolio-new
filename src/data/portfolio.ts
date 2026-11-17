@@ -129,6 +129,9 @@ const TECH_LOGO_MAP: Record<string, string> = {
   inertiajs: "/assets/tech/inertiajs.svg",
   inertia: "/assets/tech/inertiajs.svg",
   "inertia js": "/assets/tech/inertiajs.svg",
+  insforge: "/assets/tech/insforge.svg",
+  "insforge.dev": "/assets/tech/insforge.svg",
+  "ins forge": "/assets/tech/insforge.svg",
 };
 
 export function getTechLogo(techNameOrId: string): string {
@@ -238,6 +241,12 @@ export const portfolioData = {
       id: "postgresql",
       name: "PostgreSQL",
       logo: "/assets/tech/postgresql.svg",
+      category: "Database & Cloud",
+    },
+    {
+      id: "insforge",
+      name: "InsForge",
+      logo: "/assets/tech/insforge.svg",
       category: "Database & Cloud",
     },
     {

@@ -86,10 +86,10 @@ interface TechStackBarProps {
   limit?: number;
 }
 
-export function TechStackBar({ limit = 17 }: TechStackBarProps) {
+export function TechStackBar({ limit }: TechStackBarProps) {
   const { isBlack } = useTheme();
 
-  const items = portfolioData.techStack.slice(0, limit);
+  const items = limit !== undefined ? portfolioData.techStack.slice(0, limit) : portfolioData.techStack;
   const splitIndex = Math.ceil(items.length / 2);
   const baseRow1 = items.slice(0, splitIndex);
   const baseRow2 = items.slice(splitIndex);
