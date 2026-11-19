@@ -310,7 +310,7 @@ export const portfolioData = {
       durationEn: "2026",
       clientOrContext: "SMK Negeri 1 Wangkelang (Sistem Sekolah)",
       clientOrContextEn: "SMK Negeri 1 Wangkelang (School Attendance System)",
-      coverImage: "/assets/projects/absensi-smkn1-wangkelang.png",
+      coverImage: "/assets/projects/absensi-smkn1-wangkelang.webp",
       techStack: [
         "Next.js",
         "React",
