@@ -289,6 +289,83 @@ export const portfolioData = {
   // =========================================================================
   projects: [
     {
+      slug: "absensi-smkn1-wangkelang",
+      title: "Sistem Presensi QR Dinamis & Device Lock — SMKN 1 Wangkelang",
+      titleEn: "Dynamic QR & Device Lock Attendance System — SMKN 1 Wangkelang",
+      year: "2026",
+      category: "Full Stack",
+      categories: ["Full Stack", "Web App"],
+      featured: true,
+      summary:
+        "Sistem absensi sekolah real-time dengan rotasi kode QR stateless HMAC 15 detik, penguncian identitas perangkat (anti-titip absen), dan rekapitulasi kehadiran per mata pelajaran.",
+      summaryEn:
+        "A real-time school attendance platform featuring stateless 15s HMAC rotating QR codes, browser-fingerprint device locks, and per-subject attendance analytics.",
+      description:
+        "Sistem Presensi SMK Negeri 1 Wangkelang adalah aplikasi web full-stack yang mengeliminasi kecurangan titip absen di sekolah. Dilengkapi mode proyektor jumbo untuk pemindaian massal di kelas, widget picture-in-picture mengambang, serta portal siswa untuk memantau pemenuhan syarat minimal kehadiran ujian semester (75%).",
+      descriptionEn:
+        "Engineered to eliminate proxy attendance in vocational high schools. Features projector jumbo mode for rapid in-class scanning, picture-in-picture floating widgets, and a dedicated student portal tracking exam attendance eligibility thresholds (75%).",
+      role: "Full Stack Engineer & System Architect",
+      roleEn: "Full Stack Engineer & System Architect",
+      duration: "2026",
+      durationEn: "2026",
+      clientOrContext: "SMK Negeri 1 Wangkelang (Sistem Sekolah)",
+      clientOrContextEn: "SMK Negeri 1 Wangkelang (School Attendance System)",
+      coverImage: "/assets/projects/absensi-smkn1-wangkelang.png",
+      techStack: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Supabase",
+        "PostgreSQL",
+        "GitHub",
+      ],
+      repoUrl: "https://github.com/denaripp/absensi-smkn1-wangkelang",
+      challengeTitle: "Mencegah Titip Absen & Manipulasi Screenshot QR",
+      challengeTitleEn: "Preventing Proxy Attendance & Static QR Sharing",
+      challenge:
+        "Absensi manual memakan waktu hingga 15 menit per jam pelajaran, sedangkan absensi QR statis rentan disebarkan via grup chat siswa. Selain itu, kamera perangkat siswa memiliki variasi spesifikasi dan rentan dicurangi dengan bertukar akun.",
+      challengeEn:
+        "Traditional paper attendance wasted up to 15 minutes per class, while static QR codes were easily screenshotted and shared via chat groups. Additionally, students could share accounts without hardware accountability.",
+      solutionTitle: "Rotasi Token HMAC Stateless & Penguncian Perangkat Keras",
+      solutionTitleEn: "Stateless HMAC Token Rotation & Hardware Device Lock",
+      solution:
+        "Mengembangkan token QR berbasis HMAC dengan waktu kedaluwarsa 15 detik tanpa beban database (stateless), dipadukan dengan penguncian perangkat otomatis via UUID dan SHA-256 browser fingerprinting pada saat pertama login.",
+      solutionEn:
+        "Implemented 15-second rotating stateless HMAC QR tokens, paired with automatic hardware locking combining UUID local identifiers and SHA-256 browser canvas/WebGL fingerprinting on first login.",
+      keyFeatures: [
+        "Mode Proyektor Jumbo & Widget Mengambang (PiP) untuk pemindaian massal kelas",
+        "Rotasi token QR dinamis tiap 15 detik berbasis HMAC SHA-256 stateless",
+        "Penguncian perangkat keras (Device Lock) dengan audit trail keamanan",
+        "Portal siswa dengan persentase kehadiran otomatis per mata pelajaran",
+        "Ekspor laporan rekapitulasi kehadiran siap cetak format Excel (.xlsx)",
+      ],
+      keyFeaturesEn: [
+        "Jumbo Projector Mode and Floating PiP Widget for high-speed in-class scanning",
+        "Dynamic 15-second rotating QR tokens powered by stateless HMAC SHA-256",
+        "Hardware Device Lock combining UUID & SHA-256 browser fingerprinting",
+        "Dedicated student portal tracking per-subject attendance percentages and exam thresholds",
+        "Official Excel (.xlsx) attendance report generator with multi-class filters",
+      ],
+      architectureHighlights: [
+        "Next.js 16 App Router dengan React 19, Turbopack, dan Partial Prerender (PPR)",
+        "Supabase PostgreSQL dengan Row-Level Security (RLS) ketat dan audit trail",
+        "Kalkulasi persentase kehadiran per mata pelajaran zero-waterfall via Promise.all",
+        "Generator laporan resmi Excel (.xlsx) siap cetak menggunakan SheetJS",
+      ],
+      architectureHighlightsEn: [
+        "Next.js 16 App Router with React 19, Turbopack, and Partial Prerendering (PPR)",
+        "Supabase PostgreSQL with strict Row-Level Security (RLS) policies and audit logging",
+        "Zero-waterfall parallel server data fetching for per-subject presence analytics",
+        "Automated official Excel (.xlsx) report generation powered by SheetJS",
+      ],
+      metrics: [
+        { label: "Waktu Presensi per Kelas", labelEn: "Classroom Scanning Speed", value: "< 2 Menit" },
+        { label: "Tingkat Kecurangan Titip Absen", labelEn: "Proxy Attendance Rate", value: "0%" },
+        { label: "Cakupan Unit Testing", labelEn: "Automated Test Suite", value: "33 Tests Pass" },
+      ],
+    },
+    {
       slug: "swiss-porfolio",
       title: "Swiss Portfolio — Digital Marketing Specialist",
       titleEn: "Swiss Portfolio — Digital Marketing Specialist Showcase",
